@@ -1,16 +1,15 @@
-import { cn } from "@/lib/utils";
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
-
-// import { getCategories } from "@/queries/categories";
-// import { getCourseList } from "@/queries/courses";
-
+import { getCategories } from "@/BackendService/queries/categories";
+import { getCourseList } from "@/BackendService/queries/courses";
 import { SectionTitle } from "@/components/custom/section-title";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ArrowRightIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const HomePage = async () => {
-  //   const courses = await getCourseList();
-  //   const categories = await getCategories();
+  const courses = await getCourseList();
+  const categories = await getCategories();
 
   return (
     <>
@@ -63,25 +62,25 @@ const HomePage = async () => {
           </Link>
         </div>
         <div className="mx-auto grid justify-center gap-4 grid-cols-2  md:grid-cols-3 2xl:grid-cols-4">
-          {/* {categories.map((category) => {
+          {categories?.map((category) => {
             return (
               <Link
-                href={`/categories/${category.id}`}
-                key={category.id}
+                href={`/categories/${category?.id}`}
+                key={category?.id}
                 className="relative overflow-hidden rounded-lg border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6">
                   <Image
-                    src={`/assets/images/categories/${category.thumbnail}`}
-                    alt={category.title}
+                    src={`/public/assets/images/categories/${category?.thumbnail}`}
+                    alt={category?.title}
                     width={100}
                     height={100}
                   />
-                  <h3 className="font-bold">{category.title}</h3>
+                  <h3 className="font-bold">{category?.title}</h3>
                 </div>
               </Link>
             );
-          })} */}
+          })}
         </div>
       </section>
 
