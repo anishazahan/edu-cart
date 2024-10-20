@@ -4,6 +4,8 @@ import { Course } from "../model/course-model";
 import { Module } from "../model/module.model";
 import { Testimonial } from "../model/testimonial-model";
 import { User } from "../model/user-model";
+import { getEnrollmentsForCourse } from "./enrollments";
+import { getTestimonialsForCourse } from "./testimonials";
 
 export async function getCourseList() {
   const courses = await Course.find({})
@@ -55,39 +57,39 @@ export async function getCourseDetails(id) {
   return replaceMongoIdInObject(course);
 }
 
-// export async function getCourseDetailsByInstructor(instructorId) {
-//   const courses = await Course.find({ instructor: instructorId }).lean();
+export async function getCourseDetailsByInstructor(instructorId) {
+  const courses = await Course.find({ instructor: instructorId }).lean();
 
-//   const enrollments = await Promise.all(
-//     courses.map(async (course) => {
-//       const enrollment = await getEnrollmentsForCourse(course._id.toString());
-//       return enrollment;
-//     })
-//   );
+  const enrollments = await Promise.all(
+    courses.map(async (course) => {
+      const enrollment = await getEnrollmentsForCourse(course._id.toString());
+      return enrollment;
+    })
+  );
 
-//   const totalEnrollments = enrollments.reduce((item, currentValue) => {
-//     return item.length + currentValue.length;
-//   });
+  const totalEnrollments = enrollments.reduce((item, currentValue) => {
+    return item.length + currentValue.length;
+  });
 
-//   const testimonials = await Promise.all(
-//     courses.map(async (course) => {
-//       const testimonial = await getTestimonialsForCourse(course._id.toString());
-//       return testimonial;
-//     })
-//   );
+  const testimonials = await Promise.all(
+    courses.map(async (course) => {
+      const testimonial = await getTestimonialsForCourse(course._id.toString());
+      return testimonial;
+    })
+  );
 
-//   const totalTestimonials = testimonials.flat();
-//   const avgRating =
-//     totalTestimonials.reduce(function (acc, obj) {
-//       return acc + obj.rating;
-//     }, 0) / totalTestimonials.length;
+  const totalTestimonials = testimonials.flat();
+  const avgRating =
+    totalTestimonials.reduce(function (acc, obj) {
+      return acc + obj.rating;
+    }, 0) / totalTestimonials.length;
 
-//   //console.log("testimonials", totalTestimonials, avgRating);
+  //console.log("testimonials", totalTestimonials, avgRating);
 
-//   return {
-//     courses: courses.length,
-//     enrollments: totalEnrollments,
-//     reviews: totalTestimonials.length,
-//     ratings: avgRating.toPrecision(2),
-//   };
-// }
+  return {
+    courses: courses.length,
+    enrollments: totalEnrollments,
+    reviews: totalTestimonials.length,
+    ratings: avgRating.toPrecision(2),
+  };
+}
