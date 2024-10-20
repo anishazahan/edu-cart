@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import CourseCard from "./courses/_components/CourseCard";
 
 const HomePage = async () => {
   const courses = await getCourseList();
@@ -93,9 +94,9 @@ const HomePage = async () => {
           </Link>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-          {/* {courses.map((course) => {
+          {courses?.map((course) => {
             return <CourseCard key={course.id} course={course} />;
-          })} */}
+          })}
         </div>
       </section>
     </>
