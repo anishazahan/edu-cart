@@ -18,7 +18,7 @@ const userSchema = new Schema({
     type: String,
   },
   phone: {
-    required: true,
+    required: false,
     type: String,
   },
   role: {
@@ -43,4 +43,4 @@ const userSchema = new Schema({
   },
 });
 
-export const User = mongoose.models.User ?? mongoose.model("User", userSchema);
+export const User = mongoose?.models?.User ?? mongoose.model("User", userSchema);
