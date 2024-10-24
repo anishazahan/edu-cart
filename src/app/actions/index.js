@@ -1,15 +1,16 @@
 "use server";
 
-import { findUserByCredentials } from "@/BackendService/queries/authentication";
+import { signIn } from "../../../auth";
 
-export async function performLogin(formData) {
+export async function credentialLogin(formData) {
   try {
-    const found = await findUserByCredentials(formData);
-
-    console.log("found........", found);
-
-    return found?._doc;
+    const response = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+    return response;
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 }

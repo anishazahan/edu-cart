@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { performLogin } from "@/app/actions";
+import { credentialLogin } from "@/app/actions";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,37 +18,27 @@ export function LoginForm() {
 
   async function onSubmit(event) {
     event.preventDefault();
+    setError("");
 
     try {
       const formData = new FormData(event.currentTarget);
-      const credential = {};
-      credential.email = formData.get("email");
-      credential.password = formData.get("password");
+      const response = await credentialLogin(formData);
 
-      const response = await performLogin(credential);
-
-      if (response) {
-        router.push("/");
+      if (!!response.error) {
+        console.error(response.error);
+        setError("Credentials didn't match");
       } else {
-        setError("Please provide a valid login credential");
+        router.push("/");
       }
-
-      // if (!!response.error) {
-      //   console.error(response.error);
-      //   setError("Please provide a valid login credential");
-      // } else {
-
-      //   router.push("/");
-      // }
     } catch (e) {
-      setError("Please provide a valid login credential");
+      setError("Credentials didn't match");
     }
   }
 
   return (
     <Card className="mx-auto max-w-sm w-full">
-      <h2 className="text-sm text-red-600">{error}</h2>
       <CardHeader>
+        <p className="text-center text-sm font-semibold text-red-600">{error}</p>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>Enter your email below to login to your account</CardDescription>
       </CardHeader>
