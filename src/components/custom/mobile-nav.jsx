@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button, buttonVariants } from "../ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 import { useLockBody } from "@/hooks/use-lock-body";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 export function MobileNav({ items, children }) {
   useLockBody();
@@ -14,9 +15,11 @@ export function MobileNav({ items, children }) {
   const { data: session } = useSession();
 
   const [loginSession, setLoginSession] = useState(null);
+  if (session?.error === "RefreshAccessTokenError") {
+    redirect("/login");
+  }
 
   useEffect(() => {
-    console.log("test");
     setLoginSession(session);
   }, [session]);
 
