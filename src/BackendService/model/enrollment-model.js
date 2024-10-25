@@ -1,24 +1,24 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const enrollmentSchema = new Schema({
   enrollment_date: {
     required: true,
-    type: Date
+    type: Date,
   },
 
   status: {
     required: true,
-    type: String
+    type: String,
   },
 
   completion_date: {
-    required: true,
-    type: Date
+    required: false,
+    type: Date,
   },
 
   method: {
     required: true,
-    type: String
+    type: String,
   },
 
   course: { type: Schema.ObjectId, ref: "Course" },
