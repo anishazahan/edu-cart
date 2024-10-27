@@ -3,8 +3,21 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "../../../../../../auth";
 
-const CourseDetailsIntro = ({ course }) => {
+import { hasEnrollmentForCourse } from "@/BackendService/queries/enrollments";
+import { getUserByEmail } from "@/BackendService/queries/users";
+import { redirect } from "next/navigation";
+
+const CourseDetailsIntro = async ({ course }) => {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+  const loggedInUser = await getUserByEmail(session?.user?.email);
+
+  const hasEnrollment = await hasEnrollmentForCourse(course?.id, loggedInUser?.id);
+
+  console.log({ hasEnrollment });
+
   return (
     <div className="overflow-x-hidden  grainy">
       <section className="pt-12  sm:pt-16">
@@ -20,7 +33,13 @@ const CourseDetailsIntro = ({ course }) => {
               </p>
 
               <div className="mt-6 flex items-center justify-center flex-wrap gap-3">
-                <EnrollCourse course={course} />
+                {hasEnrollment ? (
+                  <Link href="" className={cn(buttonVariants({ size: "lg" }))}>
+                    Access Course
+                  </Link>
+                ) : (
+                  <EnrollCourse courseId={course?.id} />
+                )}
                 <Link href="" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
                   See Intro
                 </Link>
