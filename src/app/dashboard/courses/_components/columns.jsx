@@ -8,10 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { formatPrice } from "@/lib/formatPrice";
 import { cn } from "@/lib/utils";
-import { GraduationCap } from "lucide-react";
-import { Star } from "lucide-react";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
+import { ArrowUpDown, GraduationCap, MoreHorizontal, Pencil, Star } from "lucide-react";
 import Link from "next/link";
 
 export const columns = [
@@ -19,10 +18,7 @@ export const columns = [
     accessorKey: "title",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
           Title <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -32,49 +28,38 @@ export const columns = [
     accessorKey: "price",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
           Price <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const price = parseFloat(row.getValue("price") || "0");
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(price);
+      const price = row.getValue("price");
+      const formatted = formatPrice(price);
       return <div>{formatted}</div>;
     },
   },
   {
-    accessorKey: "isPublished",
+    accessorKey: "active",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
           Published <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const isPublished = row.getValue("isPublished") || false;
+      const active = row.getValue("active") || false;
 
       return (
-        <Badge className={cn("bg-gray-500", isPublished && "bg-success")}>
-          {isPublished ? "Published" : "Unpublished"}
-        </Badge>
+        <Badge className={cn("bg-gray-500", active && "bg-success")}>{active ? "Published" : "Unpublished"}</Badge>
       );
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const { id } = row.original;
+      const id = row.original._id;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
