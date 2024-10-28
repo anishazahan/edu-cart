@@ -1,4 +1,5 @@
 export const replaceMongoIdInArray = (array) => {
+  if (!array) return null;
   const mappedArray = array
     .map((item) => {
       return {
@@ -12,7 +13,7 @@ export const replaceMongoIdInArray = (array) => {
 };
 
 export const replaceMongoIdInObject = (obj) => {
-  if (!obj) return;
+  if (!obj) return null;
   const { _id, ...updatedObj } = { ...obj, id: obj._id.toString() };
   return updatedObj;
 };
