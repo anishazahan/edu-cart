@@ -1,14 +1,15 @@
 "use client";
-// import uploadIcon from "@/assets/icons/upload.svg";
-import { Progress } from "@/components/ui/progress";
+
 import { cn } from "@/lib/utils";
+
 import { CloudUpload } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
+import { Progress } from "../ui/progress";
 
 export const UploadDropzone = (props) => {
-  const { isMulti = false, label } = props;
+  const { isMulti = false, label, onUpload } = props;
 
   const [droppedFiles, setDroppedFiles] = useState(null);
 
@@ -50,6 +51,7 @@ export const UploadDropzone = (props) => {
     // });
     setUploadProgress(100);
     clearInterval(progressInterval);
+    onUpload(acceptedFiles);
   }, []);
 
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
@@ -78,19 +80,13 @@ export const UploadDropzone = (props) => {
       <div className="flex flex-col items-center gap-3 text-center !text-[#858585]">
         <CloudUpload size={48} className="text-gray-600" />
         <h4 className="!font-normal  !text-[#858585]">
-          <span className="font-semibold text-black underline">
-            Click to upload
-          </span>{" "}
-          or drag and drop <br />
+          <span className="font-semibold text-black underline">Click to upload</span> or drag and drop <br />
           Maximum file size 50 MB.
         </h4>
         {/* <p>Only *.jpeg and *.png images will be accepted</p> */}
         {isUploading ? (
           <div className="mx-auto mt-4 w-full max-w-xs">
-            <Progress
-              value={uploadProgress}
-              className="h-1 w-full bg-zinc-200"
-            />
+            <Progress value={uploadProgress} className="h-1 w-full bg-zinc-200" />
           </div>
         ) : null}
       </div>
