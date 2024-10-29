@@ -1,22 +1,12 @@
-import { IconBadge } from "@/components/icon-badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { LayoutDashboard } from "lucide-react";
-import { Eye } from "lucide-react";
-import { Video } from "lucide-react";
-import { ArrowLeft } from "lucide-react";
+import { IconBadge } from "@/components/custom/icon-badge";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import Link from "next/link";
-import { LessonTitleForm } from "./lesson-title-form";
-import { LessonDescriptionForm } from "./lesson-description-form";
-import { LessonAccessForm } from "./lesson-access-form";
-import { VideoUrlForm } from "./video-url-form";
 import { CourseActions } from "../../../_components/course-action";
+import { LessonAccessForm } from "./lesson-access-form";
+import { LessonDescriptionForm } from "./lesson-description-form";
+import { LessonTitleForm } from "./lesson-title-form";
+import { VideoUrlForm } from "./video-url-form";
 export const LessonModal = ({ open, setOpen }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -49,27 +39,15 @@ export const LessonModal = ({ open, setOpen }) => {
                   <IconBadge icon={LayoutDashboard} />
                   <h2 className="text-xl">Customize Your chapter</h2>
                 </div>
-                <LessonTitleForm
-                  initialData={{}}
-                  courseId={"1"}
-                  lessonId={"1"}
-                />
-                <LessonDescriptionForm
-                  initialData={{}}
-                  courseId={"1"}
-                  lessonId={"1"}
-                />
+                <LessonTitleForm initialData={{}} courseId={"1"} lessonId={"1"} />
+                <LessonDescriptionForm initialData={{}} courseId={"1"} lessonId={"1"} />
               </div>
               <div>
                 <div className="flex items-center gap-x-2">
                   <IconBadge icon={Eye} />
                   <h2 className="text-xl">Access Settings</h2>
                 </div>
-                <LessonAccessForm
-                  initialData={{}}
-                  courseId={"1"}
-                  chapterId={"1"}
-                />
+                <LessonAccessForm initialData={{}} courseId={"1"} chapterId={"1"} />
               </div>
             </div>
             <div>

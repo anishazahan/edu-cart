@@ -5,20 +5,13 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { VideoPlayer } from "@/components/video-player";
+import { VideoPlayer } from "@/components/custom/video-player";
 
 const formSchema = z.object({
   url: z.string().min(1, {
@@ -69,9 +62,7 @@ export const VideoUrlForm = ({ initialData, courseId, lessonId }) => {
       </div>
       {!isEditing && (
         <>
-          <p className="text-sm mt-2">
-            {"https://www.youtube.com/embed/Cn4G2lZ_g2I?si=8FxqU8_NU6rYOrG1"}
-          </p>
+          <p className="text-sm mt-2">{"https://www.youtube.com/embed/Cn4G2lZ_g2I?si=8FxqU8_NU6rYOrG1"}</p>
           <div className="mt-6">
             <VideoPlayer />
           </div>
@@ -79,10 +70,7 @@ export const VideoUrlForm = ({ initialData, courseId, lessonId }) => {
       )}
       {isEditing && (
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             {/* url */}
             <FormField
               control={form.control}
@@ -91,11 +79,7 @@ export const VideoUrlForm = ({ initialData, courseId, lessonId }) => {
                 <FormItem>
                   <FormLabel>Video URL</FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'Introduction to the course'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,11 +93,7 @@ export const VideoUrlForm = ({ initialData, courseId, lessonId }) => {
                 <FormItem>
                   <FormLabel>Video Duration</FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. '10:30:18'"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="e.g. '10:30:18'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

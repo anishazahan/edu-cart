@@ -5,13 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Loader2, PlusCircle } from "lucide-react";
@@ -20,22 +14,17 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ModuleList } from "./module-list";
 
+// import { createModule, reOrderModules } from "@/app/actions/module";
+// import { getSlug } from "@/lib/convertData";
+import { createModule, reOrderModules } from "@/app/actions/module";
+import { getSlug } from "@/lib/convertData";
+
 const formSchema = z.object({
   title: z.string().min(1),
 });
-const initialModules = [
-  {
-    id: "1",
-    title: "Module 1",
-    isPublished: true,
-  },
-  {
-    id: "2",
-    title: "Module 2",
-  },
-];
+
 export const ModulesForm = ({ initialData, courseId }) => {
-  const [modules, setModules] = useState(initialModules);
+  const [modules, setModules] = useState(initialData);
   const router = useRouter();
   const [isCreating, setIsCreating] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -53,10 +42,18 @@ export const ModulesForm = ({ initialData, courseId }) => {
 
   const onSubmit = async (values) => {
     try {
+      const formData = new FormData();
+      formData.append("title", values?.title);
+      formData.append("slug", getSlug(values?.title));
+      formData.append("courseId", courseId);
+      formData.append("order", modules.length);
+
+      const module = await createModule(formData);
+
       setModules((modules) => [
         ...modules,
         {
-          id: Date.now().toString(),
+          id: module?._id.toString(),
           title: values.title,
         },
       ]);
@@ -71,6 +68,7 @@ export const ModulesForm = ({ initialData, courseId }) => {
   const onReorder = async (updateData) => {
     console.log({ updateData });
     try {
+      reOrderModules(updateData);
       setIsUpdating(true);
 
       toast.success("Chapters reordered");
@@ -109,21 +107,14 @@ export const ModulesForm = ({ initialData, courseId }) => {
 
       {isCreating && (
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course...'"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'Introduction to the course...'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -136,25 +127,12 @@ export const ModulesForm = ({ initialData, courseId }) => {
         </Form>
       )}
       {!isCreating && (
-        <div
-          className={cn(
-            "text-sm mt-2",
-            !modules?.length && "text-slate-500 italic"
-          )}
-        >
+        <div className={cn("text-sm mt-2", !modules?.length && "text-slate-500 italic")}>
           {!modules?.length && "No module"}
-          <ModuleList
-            onEdit={onEdit}
-            onReorder={onReorder}
-            items={modules || []}
-          />
+          <ModuleList onEdit={onEdit} onReorder={onReorder} items={modules || []} />
         </div>
       )}
-      {!isCreating && (
-        <p className="text-xs text-muted-foreground mt-4">
-          Drag & Drop to reorder the modules
-        </p>
-      )}
+      {!isCreating && <p className="text-xs text-muted-foreground mt-4">Drag & Drop to reorder the modules</p>}
     </div>
   );
 };
