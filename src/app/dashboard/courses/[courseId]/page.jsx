@@ -23,7 +23,7 @@ const EditCourse = async ({ params: { courseId } }) => {
       id: c.id,
     };
   });
-  console.log(mappedCategories);
+
   return (
     <>
       <AlertBanner label="This course is unpublished. It will not be visible in the course." variant="warning" />
