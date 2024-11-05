@@ -2,12 +2,16 @@ import { IconBadge } from "@/components/custom/icon-badge";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import Link from "next/link";
-import { CourseActions } from "../../../_components/course-action";
 import { LessonAccessForm } from "./lesson-access-form";
+import { LessonActions } from "./lesson-action";
 import { LessonDescriptionForm } from "./lesson-description-form";
 import { LessonTitleForm } from "./lesson-title-form";
 import { VideoUrlForm } from "./video-url-form";
-export const LessonModal = ({ open, setOpen, courseId, lesson }) => {
+export const LessonModal = ({ open, setOpen, courseId, moduleId, lesson, onclose }) => {
+  function postDelete() {
+    setOpen(false);
+    onclose();
+  }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {/* <DialogTrigger>Open</DialogTrigger> */}
@@ -28,7 +32,7 @@ export const LessonModal = ({ open, setOpen, courseId, lesson }) => {
                 Back to course setup
               </Link>
               <div className="flex items-center justify-end">
-                <CourseActions />
+                <LessonActions lesson={lesson} moduleId={moduleId} onDelete={postDelete} />
               </div>
             </div>
           </div>

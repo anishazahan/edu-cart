@@ -148,7 +148,16 @@ export const LessonForm = ({ initialData, moduleId, courseId }) => {
         </div>
       )}
       {!isCreating && <p className="text-xs text-muted-foreground mt-4">Drag & Drop to reorder the lessons</p>}
-      <LessonModal open={isEditing} setOpen={setIsEditing} courseId={courseId} lesson={lessonToEdit} />
+      <LessonModal
+        open={isEditing}
+        setOpen={setIsEditing}
+        courseId={courseId}
+        moduleId={moduleId}
+        lesson={lessonToEdit}
+        onclose={() => {
+          window.location.reload();
+        }}
+      />
     </div>
   );
 };
