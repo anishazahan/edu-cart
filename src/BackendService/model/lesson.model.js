@@ -1,34 +1,40 @@
-import mongoose, {Schema} from "mongoose";
-
+import mongoose, { Schema } from "mongoose";
 
 const lessonSchema = new Schema({
   title: {
     required: true,
-    type: String
+    type: String,
   },
   description: {
     required: false,
-    type: String
+    type: String,
   },
   duration: {
     required: true,
-    type: Number
+    default: 0,
+    type: Number,
   },
   video_url: {
-    required: true,
-    type: String
+    required: false,
+    type: String,
   },
-  published: {
+  active: {
     required: true,
-    type: Boolean
+    default: false,
+    type: Boolean,
   },
   slug: {
     required: true,
-    type: String
+    type: String,
   },
   access: {
     required: true,
-    type: String
+    default: "private",
+    type: String,
+  },
+  order: {
+    required: true,
+    type: Number,
   },
 });
 

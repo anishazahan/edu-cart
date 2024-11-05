@@ -4,14 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { updateLesson } from "@/app/actions/lesson";
+import { VideoPlayer } from "@/components/custom/video-player";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { formatDuration } from "@/lib/date";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { VideoPlayer } from "@/components/custom/video-player";
 
 const formSchema = z.object({
   url: z.string().min(1, {
@@ -25,21 +27,38 @@ const formSchema = z.object({
 export const VideoUrlForm = ({ initialData, courseId, lessonId }) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-
+  const [state, setState] = useState({
+    url: initialData?.url,
+    duration: formatDuration(initialData?.duration),
+  });
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: state,
   });
 
   const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (values) => {
+    console.log(values);
     try {
-      toast.success("Lesson updated");
-      toggleEdit();
-      router.refresh();
+      const payload = {};
+      payload["video_url"] = values?.url;
+      console.log(payload);
+      const duration = values?.duration;
+      const splitted = duration.split(":");
+      console.log(splitted);
+      if (splitted.length === 3) {
+        payload["duration"] = splitted[0] * 3600 + splitted[1] * 60 + splitted[2] * 1;
+        console.log(lessonId, payload);
+        await updateLesson(lessonId, payload);
+        toast.success("Lesson updated");
+        toggleEdit();
+        router.refresh();
+      } else {
+        toast.error("The duration format must be hh:mm:ss`");
+      }
     } catch {
       toast.error("Something went wrong");
     }
@@ -62,9 +81,9 @@ export const VideoUrlForm = ({ initialData, courseId, lessonId }) => {
       </div>
       {!isEditing && (
         <>
-          <p className="text-sm mt-2">{"https://www.youtube.com/embed/Cn4G2lZ_g2I?si=8FxqU8_NU6rYOrG1"}</p>
+          <p className="text-sm mt-2">{state?.url}</p>
           <div className="mt-6">
-            <VideoPlayer />
+            <VideoPlayer url={state?.url} />
           </div>
         </>
       )}

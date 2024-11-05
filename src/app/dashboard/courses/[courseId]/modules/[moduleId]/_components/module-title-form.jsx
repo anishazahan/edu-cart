@@ -4,20 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { updateModule } from "@/app/actions/module";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { getSlug } from "@/lib/convertData";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-
 const formSchema = z.object({
   title: z.string().min(1),
 });
@@ -36,7 +31,10 @@ export const ModuleTitleForm = ({ initialData, courseId, chapterId }) => {
   const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (values) => {
+    console.log(values);
     try {
+      values["slug"] = getSlug(values.title);
+      await updateModule(chapterId, values);
       toast.success("Module title updated");
       toggleEdit();
       router.refresh();
@@ -60,24 +58,17 @@ export const ModuleTitleForm = ({ initialData, courseId, chapterId }) => {
           )}
         </Button>
       </div>
-      {!isEditing && <p className="text-sm mt-2">{"Reactive Accelerator"}</p>}
+      {!isEditing && <p className="text-sm mt-2">{initialData?.title}</p>}
       {isEditing && (
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'Introduction to the course'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

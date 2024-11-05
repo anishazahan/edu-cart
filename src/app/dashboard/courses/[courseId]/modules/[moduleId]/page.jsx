@@ -1,30 +1,32 @@
-import AlertBanner from "@/components/alert-banner";
-import { IconBadge } from "@/components/icon-badge";
-import {
-  ArrowLeft,
-  BookOpenCheck,
-  Eye,
-  LayoutDashboard,
-  Video,
-} from "lucide-react";
+import { ArrowLeft, BookOpenCheck, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
-import { ModuleTitleForm } from "./_components/module-title-form";
-import { LessonForm } from "./_components/lesson-form";
 import { CourseActions } from "../../_components/course-action";
+import { LessonForm } from "./_components/lesson-form";
+import { ModuleTitleForm } from "./_components/module-title-form";
 
-const Module = async ({ params }) => {
+import AlertBanner from "@/components/custom/alert-banner";
+import { IconBadge } from "@/components/custom/icon-badge";
+
+import { getModule } from "@/BackendService/queries/modules";
+import { replaceMongoIdInArray } from "@/lib/convertData";
+
+const Module = async ({ params: { courseId, moduleId } }) => {
+  const module = await getModule(moduleId);
+  console.log(module);
+
+  const lessons = replaceMongoIdInArray(module.lessonIds).sort((a, b) => a.order - b.order);
+
+  console.log(lessons);
+
   return (
     <>
-      <AlertBanner
-        label="This module is unpublished. It will not be visible in the course."
-        variant="warning"
-      />
+      <AlertBanner label="This module is unpublished. It will not be visible in the course." variant="warning" />
 
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="w-full">
             <Link
-              href={`/dashboard/courses/${1}`}
+              href={`/dashboard/courses/${courseId}`}
               className="flex items-center text-sm hover:opacity-75 transition mb-6"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -42,14 +44,14 @@ const Module = async ({ params }) => {
                 <IconBadge icon={LayoutDashboard} />
                 <h2 className="text-xl">Customize Your module</h2>
               </div>
-              <ModuleTitleForm initialData={{}} courseId={1} chapterId={1} />
+              <ModuleTitleForm initialData={{ title: module.title }} courseId={courseId} chapterId={moduleId} />
             </div>
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={BookOpenCheck} />
                 <h2 className="text-xl">Module Lessons</h2>
               </div>
-              <LessonForm />
+              <LessonForm initialData={lessons} moduleId={moduleId} courseId={courseId} />
             </div>
           </div>
           <div>

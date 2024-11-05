@@ -5,18 +5,15 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { updateLesson } from "@/app/actions/lesson";
+import { getSlug } from "@/lib/convertData";
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -25,7 +22,7 @@ const formSchema = z.object({
 export const LessonTitleForm = ({ initialData, courseId, lessonId }) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-
+  const [title, setTitle] = useState(initialData?.title);
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const form = useForm({
@@ -37,6 +34,9 @@ export const LessonTitleForm = ({ initialData, courseId, lessonId }) => {
 
   const onSubmit = async (values) => {
     try {
+      values["slug"] = getSlug(values.title);
+      await updateLesson(lessonId, values);
+      setTitle(values.title);
       toast.success("Lesson updated");
       toggleEdit();
       router.refresh();
@@ -60,26 +60,17 @@ export const LessonTitleForm = ({ initialData, courseId, lessonId }) => {
           )}
         </Button>
       </div>
-      {!isEditing && (
-        <p className="text-sm mt-2">{"Introduction to React.js"}</p>
-      )}
+      {!isEditing && <p className="text-sm mt-2">{title}</p>}
       {isEditing && (
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'Introduction to the course'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
