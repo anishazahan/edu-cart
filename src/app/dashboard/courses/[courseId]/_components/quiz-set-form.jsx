@@ -4,15 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { updateQuizSetForCourse } from "@/app/actions/course";
 import { Button } from "@/components/ui/button";
 import { Combobox } from "@/components/ui/combobox";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -23,22 +18,10 @@ const formSchema = z.object({
   quizSetId: z.string().min(1),
 });
 
-export const QuizSetForm = ({
-  initialData,
-  courseId,
-  options = [
-    {
-      value: "quiz_set_1",
-      label: "Quiz Set 1",
-    },
-    {
-      value: "2",
-      label: "Quiz Set 2",
-    },
-  ],
-}) => {
+export const QuizSetForm = ({ initialData, courseId, options }) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
+  const foundMatch = options.find((o) => o.value === initialData.quizSetId);
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -53,6 +36,8 @@ export const QuizSetForm = ({
 
   const onSubmit = async (values) => {
     try {
+      console.log(values);
+      await updateQuizSetForCourse(courseId, values);
       toast.success("Course updated");
       toggleEdit();
       router.refresh();
@@ -77,22 +62,14 @@ export const QuizSetForm = ({
         </Button>
       </div>
       {!isEditing && (
-        <p
-          className={cn(
-            "text-sm mt-2",
-            !initialData.quizSetId && "text-slate-500 italic"
-          )}
-        >
-          {"No quiz set selected"}
+        <p className={cn("text-sm mt-2", !initialData.quizSetId && "text-slate-500 italic")}>
+          {foundMatch ? <span>{foundMatch.label}</span> : <span>"No quiz set selected"</span>}
         </p>
       )}
       {console.log({ options })}
       {isEditing && (
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <FormField
               control={form.control}
               name="quizSetId"

@@ -10,6 +10,7 @@ import { TitleForm } from "./_components/title-form";
 
 import { getCategories } from "@/BackendService/queries/categories";
 import { getCourseDetails } from "@/BackendService/queries/courses";
+import { getAllQuizSets } from "@/BackendService/queries/quizzes";
 import AlertBanner from "@/components/custom/alert-banner";
 import { IconBadge } from "@/components/custom/icon-badge";
 import { replaceMongoIdInArray } from "@/lib/convertData";
@@ -24,6 +25,17 @@ const EditCourse = async ({ params: { courseId } }) => {
       id: c.id,
     };
   });
+
+  const allQuizSets = await getAllQuizSets(true);
+  let mappedQuizSet = [];
+  if (allQuizSets && allQuizSets.length > 0) {
+    mappedQuizSet = allQuizSets.map((quizSet) => {
+      return {
+        value: quizSet.id,
+        label: quizSet.title,
+      };
+    });
+  }
 
   const modules = replaceMongoIdInArray(course?.modules).sort((a, b) => a.order - b.order);
 
@@ -56,7 +68,11 @@ const EditCourse = async ({ params: { courseId } }) => {
               options={mappedCategories}
             />
 
-            <QuizSetForm initialData={{}} courseId={courseId} />
+            <QuizSetForm
+              initialData={{ quizSetId: course?.quizSet?._id.toString() }}
+              courseId={courseId}
+              options={mappedQuizSet}
+            />
           </div>
           <div className="space-y-6">
             <div>

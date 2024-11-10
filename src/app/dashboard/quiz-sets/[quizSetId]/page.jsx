@@ -1,13 +1,13 @@
-"use client";
-
 import AlertBanner from "@/components/custom/alert-banner";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Circle, CircleCheck, Pencil, Trash } from "lucide-react";
-import { useState } from "react";
+
+import { getQuizSetById } from "@/BackendService/queries/quizzes";
+import { Circle, CircleCheck } from "lucide-react";
 import { AddQuizForm } from "./_components/add-quiz-form";
+import { QuizCardActions } from "./_components/quiz-card-actions";
 import { QuizSetAction } from "./_components/quiz-set-action";
 import { TitleForm } from "./_components/title-form";
+
 const initialQuizes = [
   {
     id: 1,
@@ -54,8 +54,22 @@ const initialQuizes = [
     ],
   },
 ];
-const EditQuizSet = () => {
-  const [quizes, setQuizes] = useState(initialQuizes);
+const EditQuizSet = async ({ params: { quizSetId } }) => {
+  const quizSet = await getQuizSetById(quizSetId);
+  const quizzes = quizSet.quizIds.map((quiz) => {
+    return {
+      id: quiz._id.toString(),
+      title: quiz.title,
+      options: quiz.options.map((option) => {
+        return {
+          label: option.text,
+          isTrue: option.is_correct,
+        };
+      }),
+    };
+  });
+  console.log(quizSet);
+
   return (
     <>
       <AlertBanner label="This course is unpublished. It will not be visible in the course." variant="warning" />
@@ -67,13 +81,15 @@ const EditQuizSet = () => {
           {/* Quiz List */}
           <div className="max-lg:order-2">
             <h2 className="text-xl mb-6">Quiz List</h2>
-            <AlertBanner
-              label="No Quiz are in the set, add some using the form above."
-              variant="warning"
-              className="rounded mb-6"
-            />
+            {quizzes.length === 0 && (
+              <AlertBanner
+                label="No Quiz are in the set, add some using the form above."
+                variant="warning"
+                className="rounded mb-6"
+              />
+            )}
             <div className="space-y-6">
-              {quizes.map((quiz) => {
+              {quizzes.map((quiz) => {
                 return (
                   <div key={quiz.id} className=" bg-gray-50 shadow-md p-4 lg:p-6 rounded-md border">
                     <h2 className="mb-3">{quiz.title}</h2>
@@ -97,12 +113,7 @@ const EditQuizSet = () => {
                       })}
                     </div>
                     <div className="flex items-center justify-end gap-2 mt-6">
-                      <Button variant="ghost" size="sm">
-                        <Pencil className="w-3 mr-1" /> Edit
-                      </Button>
-                      <Button size="sm" className="text-destructive" variant="ghost">
-                        <Trash className="w-3 mr-1" /> Delete
-                      </Button>
+                      <QuizCardActions quiz={quiz} quizSetId={quizSetId} />
                     </div>
                   </div>
                 );
@@ -117,13 +128,14 @@ const EditQuizSet = () => {
             <div className="max-w-[800px]">
               <TitleForm
                 initialData={{
-                  title: "Reactive Accelerator",
+                  title: quizSet.title,
                 }}
+                quizSetId={quizSet.id}
               />
             </div>
 
             <div className="max-w-[800px]">
-              <AddQuizForm setQuizes={setQuizes} />
+              <AddQuizForm quizSetId={quizSetId} />
             </div>
           </div>
         </div>
