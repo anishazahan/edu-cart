@@ -66,16 +66,16 @@ const HomePage = async () => {
           {categories?.map((category) => {
             return (
               <Link
-                href={`/categories/${category?.id}`}
+                // href={`/categories/${category?.id}`}
                 key={category?.id}
                 className="relative overflow-hidden rounded-lg border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
               >
-                <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6">
+                <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6 min-h-40">
                   <Image
-                    src={`/public/assets/images/categories/${category?.thumbnail}`}
+                    src="https://cdn.pixabay.com/photo/2016/01/15/12/02/editing-1141505_640.jpg"
                     alt={category?.title}
-                    width={100}
-                    height={100}
+                    className="object-cover min-h-40"
+                    fill
                   />
                   <h3 className="font-bold">{category?.title}</h3>
                 </div>

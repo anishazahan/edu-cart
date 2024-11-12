@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,9 @@ import Link from "next/link";
 import { MobileSidebar } from "./mobile-sidebar";
 
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
+import userImg from "../../assets/img/user.png";
 
 export const Navbar = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -37,8 +39,8 @@ export const Navbar = () => {
           <DropdownMenuTrigger asChild>
             <div className="cursor-pointer">
               <Avatar>
-                <AvatarImage src={loggedInUser?.profilePicture} alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarImage src={userImg} alt="@shadcn" />
+                <Image width={40} height={20} src={userImg} alt="user" />
               </Avatar>
             </div>
           </DropdownMenuTrigger>

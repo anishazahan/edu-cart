@@ -4,20 +4,16 @@ import { SessionProvider } from "next-auth/react";
 
 const navLinks = [
   {
-    title: "Features",
-    href: "/#features",
+    title: "About",
+    href: "/about",
   },
   {
-    title: "Pricing",
-    href: "/pricing",
+    title: "Contact",
+    href: "/contact",
   },
   {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Documentation",
-    href: "/docs",
+    title: "Terms & Conditions",
+    href: "/terms",
   },
 ];
 const MainLayout = ({ children }) => {
