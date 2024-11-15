@@ -44,7 +44,7 @@ export const columns = [
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Published <ArrowUpDown className="ml-2 h-4 w-4" />
+          Published <ArrowUpDown className="ml-2 h-4 w-4 " />
         </Button>
       );
     },
@@ -52,7 +52,7 @@ export const columns = [
       const active = row.getValue("active") || false;
 
       return (
-        <Badge className={cn("bg-gray-500", active && "bg-success")}>{active ? "Published" : "Unpublished"}</Badge>
+        <Badge className={cn("bg-gray-500", active && "bg-green-600")}>{active ? "Published" : "Unpublished"}</Badge>
       );
     },
   },

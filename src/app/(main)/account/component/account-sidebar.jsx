@@ -4,6 +4,8 @@ import Menu from "./account-menu";
 import { getUserByEmail } from "@/BackendService/queries/users";
 import { redirect } from "next/navigation";
 import { auth } from "../../../../../auth.js";
+import profileImg from "../../../../assets/img/user.webp";
+// import profileImg2 from "../../../../assets/img/user.png";
 
 const AccountSidebar = async () => {
   const session = await auth();
@@ -22,8 +24,7 @@ const AccountSidebar = async () => {
             <div>
               <div className="relative size-28 mx-auto">
                 <Image
-                  // src={loggedInUser?.profilePicture}
-                  src=""
+                  src={profileImg}
                   className="rounded-full shadow dark:shadow-gray-800 ring-4 ring-slate-50 dark:ring-slate-800"
                   id="profile-banner"
                   alt={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}

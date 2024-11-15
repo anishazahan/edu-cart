@@ -57,27 +57,24 @@ const HomePage = async () => {
       <section id="categories" className="container space-y-6  py-8  md:py-12 lg:py-24">
         <div className="flex items-center justify-between">
           <SectionTitle>Categories</SectionTitle>
-
-          <Link href={""} className=" text-sm font-medium  hover:opacity-80 flex items-center gap-1">
-            Browse All <ArrowRightIcon className="h-4 w-4" />
-          </Link>
         </div>
-        <div className="mx-auto grid justify-center gap-4 grid-cols-2  md:grid-cols-3 2xl:grid-cols-4">
+        <div className="mx-auto grid justify-center gap-x-4 sm:gap-x-8 gap-y-14 grid-cols-2  md:grid-cols-3 2xl:grid-cols-4">
           {categories?.map((category) => {
             return (
               <Link
+                href="#"
                 // href={`/categories/${category?.id}`}
                 key={category?.id}
-                className="relative overflow-hidden rounded-lg border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
+                className="relative  rounded-md transition-all duration-500 ease-in-out hover:scale-105  border shadow"
               >
-                <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6 min-h-40">
+                <div className="h-32 md:h-48 relative pb-6 rounded-md">
                   <Image
-                    src="https://cdn.pixabay.com/photo/2016/01/15/12/02/editing-1141505_640.jpg"
+                    src={category?.thumbnail}
                     alt={category?.title}
-                    className="object-cover min-h-40"
+                    className="object-cover h-32 md:h-48 rounded-md"
                     fill
                   />
-                  <h3 className="font-bold">{category?.title}</h3>
+                  <h3 className="font-bold absolute -bottom-8 text-sm">{category?.title}</h3>
                 </div>
               </Link>
             );

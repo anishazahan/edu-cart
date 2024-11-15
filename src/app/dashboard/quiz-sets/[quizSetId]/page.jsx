@@ -5,7 +5,6 @@ import { getQuizSetById } from "@/BackendService/queries/quizzes";
 import { Circle, CircleCheck } from "lucide-react";
 import { AddQuizForm } from "./_components/add-quiz-form";
 import { QuizCardActions } from "./_components/quiz-card-actions";
-import { QuizSetAction } from "./_components/quiz-set-action";
 import { TitleForm } from "./_components/title-form";
 
 const initialQuizes = [
@@ -74,10 +73,10 @@ const EditQuizSet = async ({ params: { quizSetId } }) => {
     <>
       <AlertBanner label="This course is unpublished. It will not be visible in the course." variant="warning" />
       <div className="p-6">
-        <div className="flex items-center justify-end">
+        {/* <div className="flex items-center justify-end">
           <QuizSetAction />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2  gap-6 mt-16">
+        </div> */}
+        <div className="grid grid-cols-1 lg:grid-cols-2  gap-6 mt-5">
           {/* Quiz List */}
           <div className="max-lg:order-2">
             <h2 className="text-xl mb-6">Quiz List</h2>

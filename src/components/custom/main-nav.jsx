@@ -55,26 +55,19 @@ export function MainNav({ items, children }) {
       <div className="">
         {items?.length ? (
           <nav className="hidden gap-6 lg:flex">
-            {items?.length ? (
-              <nav className="hidden gap-6 lg:flex">
-                {items.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.disabled ? "#" : item.href}
-                    className={cn(
-                      `flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm  ${
-                        router.pathname === item.href ? "text-[#403685]" : "text-gray-700"
-                      }`,
-                      {
-                        "text-[#403685] font-bold": router.pathname === item.href,
-                      }
-                    )}
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </nav>
-            ) : null}
+            {items?.map((item, index) => (
+              <Link
+                key={index}
+                href={item.disabled ? "#" : item.href}
+                className={cn(
+                  `${
+                    item.disabled && "cursor-not-allowed"
+                  } flex items-center text-lg font-medium transition-colors hover:text-secondary sm:text-sm`
+                )}
+              >
+                {item.title}
+              </Link>
+            ))}
           </nav>
         ) : null}
       </div>
@@ -123,7 +116,7 @@ export function MainNav({ items, children }) {
               <Link href="/account/enrolled-courses">My Courses</Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer" asChild>
-              <Link href="">Testimonials & Certificates</Link>
+              <Link href="#">Testimonials & Certificates</Link>
             </DropdownMenuItem>
             {loginSession && (
               <DropdownMenuItem className="cursor-pointer" asChild>

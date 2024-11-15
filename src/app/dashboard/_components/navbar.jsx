@@ -13,7 +13,7 @@ import { MobileSidebar } from "./mobile-sidebar";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import userImg from "../../assets/img/user.png";
+import userImg from "../../../assets/img/user.png";
 
 export const Navbar = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);

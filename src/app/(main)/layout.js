@@ -9,11 +9,13 @@ const navLinks = [
   },
   {
     title: "Contact",
-    href: "/contact",
+    href: "/",
+    disabled: true,
   },
   {
     title: "Terms & Conditions",
-    href: "/terms",
+    href: "/",
+    disabled: true,
   },
 ];
 const MainLayout = ({ children }) => {

@@ -21,7 +21,7 @@ const formSchema = z.object({
 export const ImageForm = ({ initialData, courseId }) => {
   const [file, setFile] = useState(null);
   const router = useRouter();
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
     if (file) {
@@ -65,8 +65,8 @@ export const ImageForm = ({ initialData, courseId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-gray-50 rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
+    <div className="mt-6 border bg-gray-50 rounded-md p-4 cursor-not-allowed">
+      <div className="font-medium flex items-center justify-between pointer-events-none">
         Course Image
         <Button variant="ghost" onClick={toggleEdit}>
           {isEditing && <>Cancel</>}
@@ -95,8 +95,10 @@ export const ImageForm = ({ initialData, courseId }) => {
           </div>
         ))}
       {isEditing && (
-        <div>
-          <UploadDropzone onUpload={(file) => setFile(file)} />
+        <div className="pointer-events-none">
+          <div className="cursor-not-allowed">
+            <UploadDropzone onUpload={(file) => setFile(file)} />
+          </div>
           <div className="text-xs text-muted-foreground mt-4">16:9 aspect ratio recommended</div>
         </div>
       )}
