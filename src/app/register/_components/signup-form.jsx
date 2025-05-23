@@ -60,9 +60,9 @@ export function SignupForm({ role }) {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <div className="px-6 py-4 bg-violet-50 rounded-md">
+        {/* <div className="px-6 py-4 bg-violet-50 rounded-md">
           <p className="text-[12px] font-medium text-primary">{`You can use your own credentials, but if you use the selected credentials, you can view more details and understand the project features. For testing, use these credentials: Email: ${formValues.email}, Password: ${formValues.password}`}</p>
-        </div>
+        </div> */}
 
         <CardTitle className="text-xl">Sign Up</CardTitle>
         <CardDescription>Enter your information to create an account</CardDescription>

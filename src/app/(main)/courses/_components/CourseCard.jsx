@@ -1,21 +1,18 @@
 import { EnrollCourse } from "@/components/custom/enroll-course";
 import { formatPrice } from "@/lib/formatPrice";
+import { getImageByTitle } from "@/lib/utils";
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const CourseCard = ({ course }) => {
+  const imageSrc = getImageByTitle(course?.title) || course?.thumbnail || `/assets/images/courses/${course?.thumbnail}`;
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
       <Link key={course?.id} href={`/courses/${course.id}`}>
         <div>
           <div className="relative w-full aspect-video rounded-md overflow-hidden">
-            <Image
-              src={`/assets/images/courses/${course?.thumbnail}`}
-              alt={course?.title}
-              className="object-cover"
-              fill
-            />
+            <Image src={imageSrc} alt={course?.title} className="object-contain" fill />
           </div>
           <div className="flex flex-col pt-2">
             <div className="text-lg md:text-base font-medium group-hover:text-sky-700 line-clamp-2">

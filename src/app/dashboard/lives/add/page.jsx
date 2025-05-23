@@ -1,40 +1,22 @@
 "use client";
 import * as z from "zod";
 // import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { UploadDropzone } from "@/components/file-upload";
+import { CalendarIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { UploadDropzone } from "@/components/custom/file-upload";
 import { Combobox } from "@/components/ui/combobox";
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -87,10 +69,7 @@ const AddLive = () => {
       <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
         <div className="max-w-full w-[536px]">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-8 mt-8"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
               {/* title */}
               <FormField
                 control={form.control}
@@ -99,11 +78,7 @@ const AddLive = () => {
                   <FormItem>
                     <FormLabel>Live Title</FormLabel>
                     <FormControl>
-                      <Input
-                        disabled={isSubmitting}
-                        placeholder="e.g 'Reactive Accelerator'"
-                        {...field}
-                      />
+                      <Input disabled={isSubmitting} placeholder="e.g 'Reactive Accelerator'" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -136,16 +111,9 @@ const AddLive = () => {
                         <FormControl>
                           <Button
                             variant={"outline"}
-                            className={cn(
-                              "pl-3 text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
+                            className={cn("pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
                           >
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
+                            {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                           </Button>
                         </FormControl>
@@ -159,9 +127,7 @@ const AddLive = () => {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormDescription>
-                      Your date of birth is used to calculate your age.
-                    </FormDescription>
+                    <FormDescription>Your date of birth is used to calculate your age.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -194,13 +160,7 @@ const AddLive = () => {
                   <FormItem>
                     <FormLabel>Video URL</FormLabel>
                     <FormControl>
-                      <Input
-                        className="block"
-                        disabled={isSubmitting}
-                        placeholder="Video URL"
-                        {...field}
-                        type="url"
-                      />
+                      <Input className="block" disabled={isSubmitting} placeholder="Video URL" {...field} type="url" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -239,15 +199,9 @@ const AddLive = () => {
                   <FormItem>
                     <FormLabel>Live Description</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="Live overview"
-                        className="resize-none"
-                        {...field}
-                      />
+                      <Textarea placeholder="Live overview" className="resize-none" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Write a brief description of your live
-                    </FormDescription>
+                    <FormDescription>Write a brief description of your live</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

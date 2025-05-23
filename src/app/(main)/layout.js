@@ -14,8 +14,8 @@ const navLinks = [
   },
   {
     title: "Terms & Conditions",
-    href: "/",
-    disabled: true,
+    href: "/terms",
+    disabled: false,
   },
 ];
 const MainLayout = ({ children }) => {

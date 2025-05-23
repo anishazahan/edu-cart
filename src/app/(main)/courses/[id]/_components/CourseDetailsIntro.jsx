@@ -1,6 +1,6 @@
 import { EnrollCourse } from "@/components/custom/enroll-course";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, getImageByTitle } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "../../../../../../auth";
@@ -14,9 +14,9 @@ const CourseDetailsIntro = async ({ course }) => {
   if (!session?.user) redirect("/login");
   const loggedInUser = await getUserByEmail(session?.user?.email);
 
-  const hasEnrollment = await hasEnrollmentForCourse(course?.id, loggedInUser?.id);
+  const imageSrc = getImageByTitle(course?.title) || course?.thumbnail || `/assets/images/courses/${course?.thumbnail}`;
 
-  console.log({ hasEnrollment });
+  const hasEnrollment = await hasEnrollmentForCourse(course?.id, loggedInUser?.id);
 
   return (
     <div className="overflow-x-hidden  grainy">
@@ -56,8 +56,8 @@ const CourseDetailsIntro = async ({ course }) => {
                     className="w-full rounded-lg"
                     width={768}
                     height={463}
-                    src={`/assets/images/courses/${course?.thumbnail}`}
-                    alt=""
+                    src={imageSrc}
+                    alt={course?.title || "Course Thumbnail"}
                   />
                 </div>
               </div>
