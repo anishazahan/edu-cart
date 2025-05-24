@@ -6,6 +6,7 @@ import { getCourseDetailsByInstructor } from "../../BackendService/queries/cours
 import { redirect } from "next/navigation";
 import { getUserByEmail } from "../../BackendService/queries/users";
 import { formatPrice } from "../../lib/formatPrice";
+export const dynamic = "force-dynamic";
 
 const DashboardPage = async () => {
   const session = await auth();

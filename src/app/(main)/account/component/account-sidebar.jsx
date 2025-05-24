@@ -7,6 +7,8 @@ import profileImg from "../../../../assets/img/user.webp";
 import { getUserByEmail } from "../../../../BackendService/queries/users.js";
 // import profileImg2 from "../../../../assets/img/user.png";
 
+export const dynamic = "force-dynamic";
+
 const AccountSidebar = async () => {
   const session = await auth();
   if (!session?.user) {

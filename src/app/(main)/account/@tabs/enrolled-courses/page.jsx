@@ -8,6 +8,8 @@ import { getEnrollmentsForUser } from "../../../../../BackendService/queries/enr
 import { getUserByEmail } from "../../../../../BackendService/queries/users";
 import EnrolledCourseCard from "../../component/enrolled-coursecard";
 
+export const dynamic = "force-dynamic";
+
 async function EnrolledCourses() {
   const session = await auth();
 

@@ -3,6 +3,7 @@ import PersonalDetails from "../component/personal-details";
 
 import { auth } from "../../../../../auth.js";
 import { getUserByEmail } from "../../../../BackendService/queries/users.js";
+export const dynamic = 'force-dynamic';
 
 async function Profile() {
   const session = await auth();

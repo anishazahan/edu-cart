@@ -3,6 +3,8 @@ import { getInstructorDashboardData, REVIEW_DATA } from "../../../../../lib/dash
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 
+export const dynamic = "force-dynamic";
+
 const ReviewsPage = async ({ params: { courseId } }) => {
   const course = await getCourseDetails(courseId);
   const reviewData = await getInstructorDashboardData(REVIEW_DATA);

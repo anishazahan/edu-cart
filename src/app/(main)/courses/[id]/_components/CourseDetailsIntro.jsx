@@ -9,6 +9,8 @@ import { redirect } from "next/navigation";
 import { hasEnrollmentForCourse } from "../../../../../BackendService/queries/enrollments";
 import { getUserByEmail } from "../../../../../BackendService/queries/users";
 
+export const dynamic = "force-dynamic";
+
 const CourseDetailsIntro = async ({ course }) => {
   const session = await auth();
   if (!session?.user) redirect("/login");

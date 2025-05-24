@@ -4,6 +4,8 @@ import CourseDetailsIntro from "./_components/CourseDetailsIntro";
 
 // import { getCourseDetails } from "@/queries/courses";
 
+export const dynamic = "force-dynamic";
+
 const SingleCoursePage = async ({ params: { id } }) => {
   const course = await getCourseDetails(id);
 
