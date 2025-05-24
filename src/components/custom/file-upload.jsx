@@ -36,23 +36,21 @@ export const UploadDropzone = (props) => {
     return interval;
   };
 
-  const onDrop = useCallback(async (acceptedFiles) => {
-    // Do something with the files
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      // Do something with the files
 
-    setIsUploading(true);
-    const progressInterval = startSimulatedProgress();
+      setIsUploading(true);
+      const progressInterval = startSimulatedProgress();
 
-    setDroppedFiles(acceptedFiles);
+      setDroppedFiles(acceptedFiles);
 
-    // await new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve('resolved');
-    //   }, 3000);
-    // });
-    setUploadProgress(100);
-    clearInterval(progressInterval);
-    onUpload(acceptedFiles);
-  }, []);
+      setUploadProgress(100);
+      clearInterval(progressInterval);
+      onUpload(acceptedFiles);
+    },
+    [onUpload] // Added 'onUpload' as a dependency
+  );
 
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
     onDrop,

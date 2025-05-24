@@ -17,9 +17,9 @@ export async function createModule(data) {
 
     const createdModule = await create({ title, slug, course: courseId, order });
 
-    const course = await Course.findById(courseId);
-    course.modules.push(createdModule._id);
-    course.save();
+    const foundCourse = await Course.findById(courseId); // Renamed variable
+    foundCourse.modules.push(createdModule._id);
+    foundCourse.save();
 
     return createdModule;
   } catch (e) {
@@ -61,9 +61,9 @@ export async function updateModule(moduleId, data) {
 
 export async function changeModulePublishState(moduleId) {
   console.log("changeModulePublishState", moduleId);
-  const module = await Module.findById(moduleId);
+  const foundModule = await Module.findById(moduleId); // Renamed variable
   try {
-    const res = await Module.findByIdAndUpdate(moduleId, { active: !module.active }, { lean: true });
+    const res = await Module.findByIdAndUpdate(moduleId, { active: !foundModule.active }, { lean: true });
     return res.active;
   } catch (err) {
     throw new Error(err);
@@ -73,9 +73,9 @@ export async function changeModulePublishState(moduleId) {
 export async function deleteModule(moduleId, courseId) {
   console.log("delete", moduleId, courseId);
   try {
-    const course = await Course.findById(courseId);
-    course.modules.pull(new mongoose.Types.ObjectId(moduleId));
-    course.save();
+    const foundCourse = await Course.findById(courseId); // Renamed variable
+    foundCourse.modules.pull(new mongoose.Types.ObjectId(moduleId));
+    foundCourse.save();
     await Module.findByIdAndDelete(moduleId);
   } catch (err) {
     throw new Error(err);
