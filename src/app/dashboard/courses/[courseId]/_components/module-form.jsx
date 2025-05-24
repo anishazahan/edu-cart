@@ -24,7 +24,7 @@ const formSchema = z.object({
 });
 
 export const ModulesForm = ({ initialData, courseId }) => {
-  const [modules, setModules] = useState(initialData);
+  const [modulesData, setModulesData] = useState(initialData);
   const router = useRouter();
   const [isCreating, setIsCreating] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -46,12 +46,12 @@ export const ModulesForm = ({ initialData, courseId }) => {
       formData.append("title", values?.title);
       formData.append("slug", getSlug(values?.title));
       formData.append("courseId", courseId);
-      formData.append("order", modules.length);
+      formData.append("order", modulesData.length);
 
       const newModule = await createNewModule(formData);
 
-      setModules((modules) => [
-        ...modules,
+      setModulesData((modulesData) => [
+        ...modulesData,
         {
           id: newModule?._id.toString(),
           title: values.title,
@@ -127,9 +127,9 @@ export const ModulesForm = ({ initialData, courseId }) => {
         </Form>
       )}
       {!isCreating && (
-        <div className={cn("text-sm mt-2", !modules?.length && "text-slate-500 italic")}>
-          {!modules?.length && "No module"}
-          <ModuleList onEdit={onEdit} onReorder={onReorder} items={modules || []} />
+        <div className={cn("text-sm mt-2", !modulesData?.length && "text-slate-500 italic")}>
+          {!modulesData?.length && "No module"}
+          <ModuleList onEdit={onEdit} onReorder={onReorder} items={modulesData || []} />
         </div>
       )}
       {!isCreating && <p className="text-xs text-muted-foreground mt-4">Drag & Drop to reorder the modules</p>}

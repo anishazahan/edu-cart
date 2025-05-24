@@ -65,7 +65,7 @@ export const QuizSetForm = ({ initialData, courseId, options }) => {
           {foundMatch ? (
             <span>{foundMatch.label}</span>
           ) : (
-            <span>No quiz set selected. Click &quot;Edit Quiz Set&quot; to add one.</span>
+            <span>No quiz set selected. Click "Edit Quiz Set" to add one.</span>
           )}
         </p>
       )}

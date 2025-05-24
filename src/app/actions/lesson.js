@@ -40,7 +40,6 @@ export async function reOrderLesson(data) {
 }
 
 export async function updateLesson(lessonId, data) {
-  console.log("**** updateLesson", lessonId, data);
   try {
     await Lesson.findByIdAndUpdate(lessonId, data);
   } catch (err) {
@@ -49,7 +48,6 @@ export async function updateLesson(lessonId, data) {
 }
 
 export async function changeLessonPublishState(lessonId) {
-  console.log("changeLessonPublishState", lessonId);
   const lesson = await Lesson.findById(lessonId);
   try {
     const res = await Lesson.findByIdAndUpdate(lessonId, { active: !lesson.active }, { lean: true });

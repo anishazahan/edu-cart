@@ -10,9 +10,9 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { changeModulePublishState, deleteModule } from "../../../../../../actions/module";
 
-export const ModuleActions = ({ module, courseId }) => {
+export const ModuleActions = ({ moduleData, courseId }) => {
   const [action, setAction] = useState(null);
-  const [published, setPublished] = useState(module?.active);
+  const [published, setPublished] = useState(moduleData?.active);
   const router = useRouter();
 
   async function handleSubmit(event) {
@@ -21,7 +21,7 @@ export const ModuleActions = ({ module, courseId }) => {
     try {
       switch (action) {
         case "change-active": {
-          const activeState = await changeModulePublishState(module.id);
+          const activeState = await changeModulePublishState(moduleData.id);
           setPublished(!activeState);
           toast.success("The module has been updated successfully.");
           router.refresh();
@@ -32,7 +32,7 @@ export const ModuleActions = ({ module, courseId }) => {
           if (published) {
             toast.error("A published module can not be deleted. First unpublish it, then delete.");
           } else {
-            await deleteModule(module.id, courseId);
+            await deleteModule(moduleData.id, courseId);
             // router.refresh();
             router.push(`/dashboard/courses/${courseId}`);
           }

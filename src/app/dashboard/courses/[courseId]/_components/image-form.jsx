@@ -3,7 +3,7 @@
 import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
 import { UploadDropzone } from "../../../../../components/custom/file-upload";
@@ -22,39 +22,6 @@ export const ImageForm = ({ initialData, courseId }) => {
   const [imageUrl, setImageUrl] = useState(initialData?.imageUrl || "");
 
   const toggleEdit = () => setIsEditing((current) => !current);
-
-  useEffect(() => {
-    if (!file) return;
-
-    const uploadFile = async () => {
-      try {
-        const formData = new FormData();
-        formData.append("files", file[0]);
-        formData.append("destination", "/src/public/assets/images/courses");
-        formData.append("courseId", courseId);
-
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        const result = await response.text();
-        console.log(result);
-
-        if (response.status === 200) {
-          const newImageUrl = `/src/public/assets/images/courses/${file[0].path}`;
-          setImageUrl(newImageUrl);
-          toast.success(result);
-          toggleEdit();
-          router.refresh();
-        }
-      } catch (e) {
-        toast.error(e.message);
-      }
-    };
-
-    uploadFile();
-  }, [file, courseId, router]);
 
   const onSubmit = async (values) => {
     try {

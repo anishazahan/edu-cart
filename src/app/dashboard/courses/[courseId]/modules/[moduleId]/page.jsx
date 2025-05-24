@@ -35,7 +35,7 @@ const ModulePage = async ({ params: { courseId, moduleId } }) => {
               Back to course setup
             </Link>
             <div className="flex items-center justify-end">
-              <ModuleActions module={fetchedModule} courseId={courseId} />
+              <ModuleActions moduleData={fetchedModule} courseId={courseId} />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 import { Course } from "../../BackendService/model/course-model";
-import { Module as ModModel } from "../../BackendService/model/module.model"; // ✅ Renamed import
+import { Module as ModModel } from "../../BackendService/model/module.model";
 import { create } from "../../BackendService/queries/modules";
 
 export async function createModule(data) {
