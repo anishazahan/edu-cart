@@ -17,7 +17,7 @@ import { ModuleList } from "./module-list";
 // import { createModule, reOrderModules } from "@/app/actions/module";
 // import { getSlug } from "@/lib/convertData";
 import { getSlug } from "../../../../../lib/convertData";
-import { createModule, reOrderModules } from "../../../../actions/module";
+import { createModule as createNewModule, reOrderModules as reorderModules } from "../../../../actions/module";
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -48,12 +48,12 @@ export const ModulesForm = ({ initialData, courseId }) => {
       formData.append("courseId", courseId);
       formData.append("order", modules.length);
 
-      const module = await createModule(formData);
+      const newModule = await createNewModule(formData);
 
       setModules((modules) => [
         ...modules,
         {
-          id: module?._id.toString(),
+          id: newModule?._id.toString(),
           title: values.title,
         },
       ]);
@@ -68,7 +68,7 @@ export const ModulesForm = ({ initialData, courseId }) => {
   const onReorder = async (updateData) => {
     console.log({ updateData });
     try {
-      reOrderModules(updateData);
+      reorderModules(updateData);
       setIsUpdating(true);
 
       toast.success("Chapters reordered");

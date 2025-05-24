@@ -76,7 +76,7 @@ export async function deleteModule(moduleId, courseId) {
     const foundCourse = await Course.findById(courseId); // Renamed variable
     foundCourse.modules.pull(new mongoose.Types.ObjectId(moduleId));
     foundCourse.save();
-    await Module.findByIdAndDelete(moduleId);
+    await Module.findByIdAndDelete(moduleId); // No reserved keyword used
   } catch (err) {
     throw new Error(err);
   }

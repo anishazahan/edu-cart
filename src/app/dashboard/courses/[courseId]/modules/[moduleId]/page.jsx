@@ -11,16 +11,16 @@ import { replaceMongoIdInArray } from "../../../../../../lib/convertData";
 import { ModuleActions } from "./_components/module-action";
 
 const Module = async ({ params: { courseId, moduleId } }) => {
-  const module = await getModule(moduleId);
-  console.log(module);
+  const fetchedModule = await getModule(moduleId); // Renamed variable
+  console.log(fetchedModule);
 
-  const lessons = replaceMongoIdInArray(module.lessonIds).sort((a, b) => a.order - b.order);
+  const lessons = replaceMongoIdInArray(fetchedModule.lessonIds).sort((a, b) => a.order - b.order);
 
   console.log(lessons);
 
   return (
     <>
-      {!module?.active && (
+      {!fetchedModule?.active && (
         <AlertBanner label="This module is unpublished. It will not be visible in the course." variant="warning" />
       )}
 
@@ -35,7 +35,7 @@ const Module = async ({ params: { courseId, moduleId } }) => {
               Back to course setup
             </Link>
             <div className="flex items-center justify-end">
-              <ModuleActions module={module} courseId={courseId} />
+              <ModuleActions module={fetchedModule} courseId={courseId} />
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ const Module = async ({ params: { courseId, moduleId } }) => {
                 <IconBadge icon={LayoutDashboard} />
                 <h2 className="text-xl">Customize Your module</h2>
               </div>
-              <ModuleTitleForm initialData={{ title: module.title }} courseId={courseId} chapterId={moduleId} />
+              <ModuleTitleForm initialData={{ title: fetchedModule.title }} courseId={courseId} chapterId={moduleId} />
             </div>
             <div>
               <div className="flex items-center gap-x-2">

@@ -63,7 +63,7 @@ export const QuizSetForm = ({ initialData, courseId, options }) => {
       </div>
       {!isEditing && (
         <p className={cn("text-sm mt-2", !initialData.quizSetId && "text-slate-500 italic")}>
-          {foundMatch ? <span>{foundMatch.label}</span> : <span>"No quiz set selected"</span>}
+          {foundMatch ? <span>{foundMatch.label}</span> : <span>No quiz set selected</span>}
         </p>
       )}
       {console.log({ options })}

@@ -49,7 +49,7 @@ export const UploadDropzone = (props) => {
       clearInterval(progressInterval);
       onUpload(acceptedFiles);
     },
-    [onUpload] // Added 'onUpload' as a dependency
+    [onUpload, startSimulatedProgress] // Added 'onUpload' and 'startSimulatedProgress' as dependencies
   );
 
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
