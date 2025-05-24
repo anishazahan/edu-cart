@@ -1,5 +1,5 @@
-import { replaceMongoIdInObject } from "@/lib/convertData";
 import bcrypt from "bcryptjs";
+import { replaceMongoIdInObject } from "../../lib/convertData";
 import { User } from "../model/user-model";
 
 export async function getUserByEmail(email) {

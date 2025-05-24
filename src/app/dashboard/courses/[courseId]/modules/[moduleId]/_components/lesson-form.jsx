@@ -4,16 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { createLesson, reOrderLesson } from "@/app/actions/lesson";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { getSlug } from "@/lib/convertData";
-import { cn } from "@/lib/utils";
 import { Loader2, PlusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "../../../../../../../components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../../../components/ui/form";
+import { Input } from "../../../../../../../components/ui/input";
+import { getSlug } from "../../../../../../../lib/convertData";
+import { cn } from "../../../../../../../lib/utils";
+import { createLesson, reOrderLesson } from "../../../../../../actions/lesson";
 import { LessonList } from "./lesson-list";
 import { LessonModal } from "./lesson-modal";
 

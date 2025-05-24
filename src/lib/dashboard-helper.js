@@ -1,7 +1,7 @@
-import { getCourseDetails, getCourseDetailsByInstructor } from "@/BackendService/queries/courses";
-import { getAReport } from "@/BackendService/queries/reports";
-import { getUserByEmail, getUserDetails } from "@/BackendService/queries/users";
 import { auth } from "../../auth";
+import { getCourseDetails, getCourseDetailsByInstructor } from "../BackendService/queries/courses";
+import { getAReport } from "../BackendService/queries/reports";
+import { getUserByEmail, getUserDetails } from "../BackendService/queries/users";
 
 export const COURSE_DATA = "course";
 export const ENROLLMENT_DATA = "enrollment";

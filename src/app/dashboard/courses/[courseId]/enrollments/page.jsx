@@ -1,5 +1,5 @@
-import { getCourseDetails } from "@/BackendService/queries/courses";
-import { ENROLLMENT_DATA, getInstructorDashboardData } from "@/lib/dashboard-helper";
+import { getCourseDetails } from "../../../../../BackendService/queries/courses";
+import { ENROLLMENT_DATA, getInstructorDashboardData } from "../../../../../lib/dashboard-helper";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 

@@ -1,11 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
+import { cn } from "../../lib/utils";
 
 import { useEffect, useState } from "react";
 import userImg from "../../assets/img/user.png";

@@ -1,8 +1,14 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../../../../../components/ui/carousel";
 
-import { SectionTitle } from "@/components/custom/section-title";
-import { StarRating } from "@/components/custom/star-rating";
 import Image from "next/image";
+import { SectionTitle } from "../../../../../components/custom/section-title";
+import { StarRating } from "../../../../../components/custom/star-rating";
 
 const Testimonials = ({ testimonials }) => {
   return (

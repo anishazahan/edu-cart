@@ -1,9 +1,9 @@
 "use client";
 
-import { createCheckoutSession } from "@/app/actions/stripe";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { createCheckoutSession } from "../../app/actions/stripe";
+import { Button, buttonVariants } from "../../components/ui/button";
+import { cn } from "../../lib/utils";
 
 export const EnrollCourse = ({ asLink, course }) => {
   const formAction = async (data) => {

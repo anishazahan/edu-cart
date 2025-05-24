@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 import { CloudUpload } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { replaceMongoIdInObject } from "@/lib/convertData";
+import { replaceMongoIdInObject } from "../../lib/convertData";
 import { Lesson } from "../model/lesson.model";
 import { Module } from "../model/module.model";
 

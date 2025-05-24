@@ -1,9 +1,9 @@
 "use server";
 
-import { Lesson } from "@/BackendService/model/lesson.model";
-import { Module } from "@/BackendService/model/module.model";
-import { create } from "@/BackendService/queries/lessons";
 import mongoose from "mongoose";
+import { Lesson } from "../../BackendService/model/lesson.model";
+import { Module } from "../../BackendService/model/module.model";
+import { create } from "../../BackendService/queries/lessons";
 
 export async function createLesson(data) {
   try {

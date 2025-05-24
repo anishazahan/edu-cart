@@ -4,16 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { updateCourse } from "@/app/actions/course";
-import { Button } from "@/components/ui/button";
-import { Combobox } from "@/components/ui/combobox";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Button } from "../../../../../components/ui/button";
+import { Combobox } from "../../../../../components/ui/combobox";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../components/ui/form";
+import { updateCourse } from "../../../../actions/course";
 
-import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { cn } from "../../../../../lib/utils";
 
 const formSchema = z.object({
   value: z.string().min(1),

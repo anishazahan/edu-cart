@@ -3,11 +3,11 @@ import Link from "next/link";
 import { LessonForm } from "./_components/lesson-form";
 import { ModuleTitleForm } from "./_components/module-title-form";
 
-import AlertBanner from "@/components/custom/alert-banner";
-import { IconBadge } from "@/components/custom/icon-badge";
+import AlertBanner from "../../../../../../components/custom/alert-banner";
+import { IconBadge } from "../../../../../../components/custom/icon-badge";
 
-import { getModule } from "@/BackendService/queries/modules";
-import { replaceMongoIdInArray } from "@/lib/convertData";
+import { getModule } from "../../../../../../BackendService/queries/modules";
+import { replaceMongoIdInArray } from "../../../../../../lib/convertData";
 import { ModuleActions } from "./_components/module-action";
 
 const Module = async ({ params: { courseId, moduleId } }) => {

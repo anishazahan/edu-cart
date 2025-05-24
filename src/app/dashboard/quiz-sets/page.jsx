@@ -1,4 +1,4 @@
-import { getAllQuizSets } from "@/BackendService/queries/quizzes";
+import { getAllQuizSets } from "../../../BackendService//queries/quizzes";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 

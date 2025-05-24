@@ -4,16 +4,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { updateLesson } from "@/app/actions/lesson";
-import { VideoPlayer } from "@/components/custom/video-player";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { formatDuration } from "@/lib/date";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { VideoPlayer } from "../../../../../../../components/custom/video-player";
+import { Button } from "../../../../../../../components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../../../../../components/ui/form";
+import { Input } from "../../../../../../../components/ui/input";
+import { formatDuration } from "../../../../../../../lib/date";
+import { updateLesson } from "../../../../../../actions/lesson";
 
 const formSchema = z.object({
   url: z.string().min(1, {

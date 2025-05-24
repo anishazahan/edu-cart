@@ -1,4 +1,4 @@
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "../../../../../components/ui/accordion";
 
 import { BookCheck, Clock10 } from "lucide-react";
 

@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import logo from "../../assets/img/logo.svg";
+import { cn } from "../../lib/utils";
 
 export const Logo = ({ className = "" }) => {
   return (

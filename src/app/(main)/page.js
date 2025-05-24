@@ -1,10 +1,10 @@
-import { getCategories } from "@/BackendService/queries/categories";
-import { getCourseList } from "@/BackendService/queries/courses";
-import { SectionTitle } from "@/components/custom/section-title";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { getCategories } from "../../BackendService/queries/categories";
+import { getCourseList } from "../../BackendService/queries/courses";
+import { SectionTitle } from "../../components/custom/section-title";
+import { buttonVariants } from "../../components/ui/button";
+import { cn } from "../../lib/utils";
 import CourseCard from "./courses/_components/CourseCard";
 
 const HomePage = async () => {

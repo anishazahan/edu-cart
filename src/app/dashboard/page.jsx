@@ -1,11 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 
-import { getCourseDetailsByInstructor } from "@/BackendService/queries/courses";
 import { auth } from "../../../auth";
+import { getCourseDetailsByInstructor } from "../../BackendService/queries/courses";
 
-import { getUserByEmail } from "@/BackendService/queries/users";
-import { formatPrice } from "@/lib/formatPrice";
 import { redirect } from "next/navigation";
+import { getUserByEmail } from "../../BackendService/queries/users";
+import { formatPrice } from "../../lib/formatPrice";
 
 const DashboardPage = async () => {
   const session = await auth();

@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
-import { User } from "@/BackendService/model/user-model";
+import { User } from "./src/BackendService/model/user-model";
 
 async function refreshAccessToken(token) {
   try {

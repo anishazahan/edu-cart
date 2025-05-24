@@ -4,16 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { updateCourse } from "@/app/actions/course";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { formatPrice } from "@/lib/formatPrice";
-import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "../../../../../components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../components/ui/form";
+import { Input } from "../../../../../components/ui/input";
+import { formatPrice } from "../../../../../lib/formatPrice";
+import { cn } from "../../../../../lib/utils";
+import { updateCourse } from "../../../../actions/course";
 
 const formSchema = z.object({
   price: z.coerce.number(),

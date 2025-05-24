@@ -1,8 +1,8 @@
 import ChangePassword from "../component/change-password";
 import PersonalDetails from "../component/personal-details";
 
-import { getUserByEmail } from "@/BackendService/queries/users";
 import { auth } from "../../../../../auth.js";
+import { getUserByEmail } from "../../../../BackendService/queries/users.js";
 
 async function Profile() {
   const session = await auth();

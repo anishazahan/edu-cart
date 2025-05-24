@@ -4,17 +4,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { updateLesson } from "@/app/actions/lesson";
+import { updateLesson } from "../../../../../../actions/lesson";
 
-import { Editor } from "@/components/custom/editor";
-import { Preview } from "@/components/custom/preview";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Editor } from "../../../../../../../components/custom/editor";
+import { Preview } from "../../../../../../../components/custom/preview";
+import { Button } from "../../../../../../../components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../../../components/ui/form";
+import { cn } from "../../../../../../../lib/utils";
 
 const formSchema = z.object({
   description: z.string().min(1),

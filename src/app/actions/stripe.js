@@ -1,8 +1,8 @@
 "use server";
 
-import { stripe } from "@/lib/stripe";
-import { formatAmountForStripe } from "@/lib/stripe-helpers";
 import { headers } from "next/headers";
+import { stripe } from "../../lib/stripe";
+import { formatAmountForStripe } from "../../lib/stripe-helpers";
 const CURRENCY = "USD";
 
 export async function createCheckoutSession(data) {

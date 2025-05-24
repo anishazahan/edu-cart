@@ -1,9 +1,9 @@
 "use server";
 
-import { Course } from "@/BackendService/model/course-model";
-import { Module } from "@/BackendService/model/module.model";
-import { create } from "@/BackendService/queries/modules";
 import mongoose from "mongoose";
+import { Course } from "../../BackendService/model/course-model";
+import { Module } from "../../BackendService/model/module.model";
+import { create } from "../../BackendService/queries/modules";
 // import { create } from "@/queries/modules";
 // import { Course } from "@/model/course-model";
 // import { Module } from "@/model/module.model";

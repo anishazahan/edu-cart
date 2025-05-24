@@ -1,6 +1,6 @@
-import { getCourseDetailsByInstructor } from "@/BackendService/queries/courses";
 import { MessageSquare, Presentation, Star, UsersRound } from "lucide-react";
 import img from "../../../../../assets/img/user.webp";
+import { getCourseDetailsByInstructor } from "../../../../../BackendService/queries/courses";
 
 import Image from "next/image";
 

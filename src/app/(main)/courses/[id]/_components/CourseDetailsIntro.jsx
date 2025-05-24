@@ -1,13 +1,13 @@
-import { EnrollCourse } from "@/components/custom/enroll-course";
-import { buttonVariants } from "@/components/ui/button";
-import { cn, getImageByTitle } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "../../../../../../auth";
+import { EnrollCourse } from "../../../../../components/custom/enroll-course";
+import { buttonVariants } from "../../../../../components/ui/button";
+import { cn, getImageByTitle } from "../../../../../lib/utils";
 
-import { hasEnrollmentForCourse } from "@/BackendService/queries/enrollments";
-import { getUserByEmail } from "@/BackendService/queries/users";
 import { redirect } from "next/navigation";
+import { hasEnrollmentForCourse } from "../../../../../BackendService/queries/enrollments";
+import { getUserByEmail } from "../../../../../BackendService/queries/users";
 
 const CourseDetailsIntro = async ({ course }) => {
   const session = await auth();

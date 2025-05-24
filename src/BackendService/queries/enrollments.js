@@ -1,4 +1,4 @@
-import { replaceMongoIdInArray } from "@/lib/convertData";
+import { replaceMongoIdInArray } from "../../lib/convertData";
 import { Course } from "../model/course-model";
 import { Enrollment } from "../model/enrollment-model";
 

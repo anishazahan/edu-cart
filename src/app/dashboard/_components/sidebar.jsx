@@ -1,5 +1,5 @@
-import { Logo } from "@/components/custom/logo";
 import Link from "next/link";
+import { Logo } from "../../../components/custom/logo";
 import { SidebarRoutes } from "./sidebar-routes";
 
 const Sidebar = () => {

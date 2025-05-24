@@ -4,15 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { updateLesson } from "@/app/actions/lesson";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Form, FormControl, FormDescription, FormField, FormItem } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "../../../../../../../components/ui/button";
+import { Checkbox } from "../../../../../../../components/ui/checkbox";
+import { Form, FormControl, FormDescription, FormField, FormItem } from "../../../../../../../components/ui/form";
+import { cn } from "../../../../../../../lib/utils";
+import { updateLesson } from "../../../../../../actions/lesson";
 
 const formSchema = z.object({
   isFree: z.boolean().default(false),

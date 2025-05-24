@@ -1,8 +1,8 @@
 "use server";
 
-import { Quizset } from "@/BackendService/model/quizset-model";
-import { createQuiz } from "@/BackendService/queries/quizzes";
-import { getSlug } from "@/lib/convertData";
+import { Quizset } from "../../BackendService/model/quizset-model";
+import { createQuiz } from "../../BackendService/queries/quizzes";
+import { getSlug } from "../../lib/convertData";
 
 export async function updateQuizSet(quizset, dataToUpdate) {
   try {

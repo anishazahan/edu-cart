@@ -1,25 +1,22 @@
-import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
+import { cn } from "../../lib/utils";
 
-const backgroundVariants = cva(
-  "rounded-full flex items-center justify-center",
-  {
-    variants: {
-      variant: {
-        default: "bg-emerald-100",
-        success: "bg-emerald-100",
-      },
-      size: {
-        default: "p-2",
-        sm: "p-1",
-      },
+const backgroundVariants = cva("rounded-full flex items-center justify-center", {
+  variants: {
+    variant: {
+      default: "bg-emerald-100",
+      success: "bg-emerald-100",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+    size: {
+      default: "p-2",
+      sm: "p-1",
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
 
 const iconVariants = cva("", {
   variants: {

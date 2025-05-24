@@ -5,19 +5,13 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { updateQuizSet } from "@/app/actions/quiz";
+import { useState } from "react";
+import { Button } from "../../../../../components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../components/ui/form";
+import { Input } from "../../../../../components/ui/input";
+import { updateQuizSet } from "../../../../actions/quiz";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -40,7 +34,7 @@ export const TitleForm = ({ initialData = {}, quizSetId }) => {
 
   const onSubmit = async (values) => {
     try {
-      await updateQuizSet(quizSetId, values)
+      await updateQuizSet(quizSetId, values);
       toggleEdit();
       router.refresh();
     } catch (error) {
@@ -66,21 +60,14 @@ export const TitleForm = ({ initialData = {}, quizSetId }) => {
       {!isEditing && <p className="text-sm mt-2">{initialData.title}</p>}
       {isEditing && (
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'Advanced web development'"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'Advanced web development'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
-import { dbConnect } from "@/BackendService/Service/mongo";
-import { User } from "@/BackendService/model/user-model";
 import bcrypt from "bcryptjs";
+import { dbConnect } from "../../../BackendService/Service/mongo";
+import { User } from "../../../BackendService/model/user-model";
 
 export const POST = async (request) => {
   const { firstName, lastName, email, password, userRole } = await request.json();

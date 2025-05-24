@@ -1,13 +1,13 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
+import { Avatar, AvatarImage } from "../../../components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import Link from "next/link";
+} from "../../../components/ui/dropdown-menu";
 import { MobileSidebar } from "./mobile-sidebar";
 
 import { signOut } from "next-auth/react";

@@ -1,24 +1,17 @@
 "use server";
 
-import { User } from "@/BackendService/model/user-model";
 import bcrypt from "bcryptjs";
+import { User } from "../../BackendService/model/user-model";
 
 export async function findUserByCredentials(credentials) {
-  //   const user = await User.findOne(credentials).lean();
-  //   if (user) {
-  //     return replaceMongoIdInObject(user);
-  //   }
-  //   return null;
-  console.log("credentials.............hhh.......", credentials);
   try {
     if (credentials?.email) {
       const user = await User?.findOne({ email: credentials?.email });
-      console.log("user............lll........", user);
+
       if (user) {
         const isMatch = await bcrypt.compare(credentials.password, user.password);
 
         if (isMatch) {
-          console.log("match...........");
           return {
             ...user,
             _id: user._id.toString(), // Ensure _id is a string

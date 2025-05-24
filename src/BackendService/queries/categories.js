@@ -1,4 +1,4 @@
-import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/lib/convertData";
+import { replaceMongoIdInArray, replaceMongoIdInObject } from "../../lib/convertData";
 import { Category } from "../model/category-model";
 
 export async function getCategories() {

@@ -1,6 +1,6 @@
 import { Quiz } from "../model/quizzes-model";
 
-import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/lib/convertData";
+import { replaceMongoIdInArray, replaceMongoIdInObject } from "../../lib/convertData";
 import { Quizset } from "../model/quizset-model";
 
 export async function getAllQuizSets(excludeUnPublished) {

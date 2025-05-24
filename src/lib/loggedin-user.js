@@ -1,7 +1,7 @@
 import "server-only";
 
-import { getUserByEmail } from "@/BackendService/queries/users";
 import { auth } from "../../auth";
+import { getUserByEmail } from "../BackendService/queries/users";
 
 export async function getLoggedInUser() {
   const session = await auth();

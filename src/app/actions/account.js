@@ -1,7 +1,7 @@
 "use server";
 
-import { User } from "@/BackendService/model/user-model";
-import { validatePassword } from "@/BackendService/queries/users";
+import { User } from "../../BackendService/model/user-model";
+import { validatePassword } from "../../BackendService/queries/users";
 
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";

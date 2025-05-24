@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,12 +11,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+} from "../../components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
+import { cn } from "../../lib/utils";
 
 export const Combobox = ({ options, value, onChange }) => {
   const [open, setOpen] = React.useState(false);
@@ -25,15 +21,8 @@ export const Combobox = ({ options, value, onChange }) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between"
-        >
-          {value
-            ? options.find((option) => option.value === value)?.label
-            : "Select options..."}
+        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
+          {value ? options.find((option) => option.value === value)?.label : "Select options..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -52,12 +41,7 @@ export const Combobox = ({ options, value, onChange }) => {
                   }}
                   className="cursor-pointer"
                 >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === option.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
+                  <Check className={cn("mr-2 h-4 w-4", value === option.value ? "opacity-100" : "opacity-0")} />
                   {option.label}
                 </CommandItem>
               ))}

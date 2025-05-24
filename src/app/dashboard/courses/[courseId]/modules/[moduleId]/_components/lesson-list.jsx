@@ -4,9 +4,9 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { Grip, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { CirclePlay } from "lucide-react";
+import { Badge } from "../../../../../../../components/ui/badge";
+import { cn } from "../../../../../../../lib/utils";
 
 export const LessonList = ({ items, onReorder, onEdit }) => {
   const [isMounted, setIsMounted] = useState(false);

@@ -1,8 +1,8 @@
-import AlertBanner from "@/components/custom/alert-banner";
-import { cn } from "@/lib/utils";
+import AlertBanner from "../../../../components/custom/alert-banner";
+import { cn } from "../../../../lib/utils";
 
-import { getQuizSetById } from "@/BackendService/queries/quizzes";
 import { Circle, CircleCheck } from "lucide-react";
+import { getQuizSetById } from "../../../../BackendService/queries/quizzes";
 import { AddQuizForm } from "./_components/add-quiz-form";
 import { QuizCardActions } from "./_components/quiz-card-actions";
 import { TitleForm } from "./_components/title-form";

@@ -8,9 +8,9 @@ import Image from "next/image";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { UploadDropzone } from "@/components/custom/file-upload";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { UploadDropzone } from "../../../../../components/custom/file-upload";
+import { Button } from "../../../../../components/ui/button";
 
 const formSchema = z.object({
   imageUrl: z.string().min(1, {

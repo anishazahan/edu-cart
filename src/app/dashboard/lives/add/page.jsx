@@ -1,13 +1,6 @@
 "use client";
 import * as z from "zod";
 // import axios from "axios";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -15,9 +8,24 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Button } from "../../../../components/ui/button";
+import { Calendar } from "../../../../components/ui/calendar";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../../components/ui/form";
+import { Input } from "../../../../components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../../../../components/ui/popover";
+import { Textarea } from "../../../../components/ui/textarea";
+import { cn } from "../../../../lib/utils";
 
-import { UploadDropzone } from "@/components/custom/file-upload";
-import { Combobox } from "@/components/ui/combobox";
+import { UploadDropzone } from "../../../../components/custom/file-upload";
+import { Combobox } from "../../../../components/ui/combobox";
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Title is required!",

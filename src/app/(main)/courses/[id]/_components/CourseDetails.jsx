@@ -1,5 +1,5 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { formatMyDate } from "@/lib/date";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../../components/ui/tabs";
+import { formatMyDate } from "../../../../../lib/date.js";
 
 import Image from "next/image";
 import img from "../../../../../assets/img/user.webp";

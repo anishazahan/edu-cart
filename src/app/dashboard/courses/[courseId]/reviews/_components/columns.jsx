@@ -1,8 +1,8 @@
 "use client";
 
-import { StarRating } from "@/components/custom/star-rating";
-import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { StarRating } from "../../../../../../components/custom/star-rating";
+import { Button } from "../../../../../../components/ui/button";
 
 export const columns = [
   {

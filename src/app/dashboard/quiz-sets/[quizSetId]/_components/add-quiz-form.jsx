@@ -6,23 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { PlusCircle } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
-import { addQuizToQuizSet } from "@/app/actions/quiz";
+import { Button } from "../../../../../components/ui/button";
+import { Checkbox } from "../../../../../components/ui/checkbox";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../../components/ui/form";
+import { Input } from "../../../../../components/ui/input";
+import { Textarea } from "../../../../../components/ui/textarea";
+import { addQuizToQuizSet } from "../../../../actions/quiz";
 
 const formSchema = z.object({
   title: z
@@ -118,9 +108,9 @@ export const AddQuizForm = ({ quizSetId }) => {
 
       const correctness = [values.optionA.isTrue, values.optionB.isTrue, values.optionC.isTrue, values.optionD.isTrue];
 
-      const correctMarked = correctness.filter(c => c);
+      const correctMarked = correctness.filter((c) => c);
 
-      const isOneCorrecrMarked = (correctMarked.length === 1);
+      const isOneCorrecrMarked = correctMarked.length === 1;
 
       if (isOneCorrecrMarked) {
         // Call server action
@@ -149,9 +139,8 @@ export const AddQuizForm = ({ quizSetId }) => {
 
         //toggleEdit();
         router.refresh();
-
       } else {
-        toast.error("You must mark only one correct answer.")
+        toast.error("You must mark only one correct answer.");
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -160,16 +149,11 @@ export const AddQuizForm = ({ quizSetId }) => {
 
   return (
     <div className="mt-6 border bg-gray-50 rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Add New Quiz
-      </div>
+      <div className="font-medium flex items-center justify-between">Add New Quiz</div>
 
       {
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             {/* quiz title */}
             <FormField
               control={form.control}
@@ -178,11 +162,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                 <FormItem>
                   <FormLabel>Quiz Title</FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="Enter quiz question"
-                      {...field}
-                    />
+                    <Input disabled={isSubmitting} placeholder="Enter quiz question" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -196,11 +176,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                 <FormItem>
                   <FormLabel>Quiz Description</FormLabel>
                   <FormControl>
-                    <Textarea
-                      disabled={isSubmitting}
-                      placeholder="Enter quiz description"
-                      {...field}
-                    />
+                    <Textarea disabled={isSubmitting} placeholder="Enter quiz description" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -217,10 +193,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -233,11 +206,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input
-                            disabled={isSubmitting}
-                            placeholder="Enter quiz question"
-                            {...field}
-                          />
+                          <Input disabled={isSubmitting} placeholder="Enter quiz question" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -258,10 +227,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -274,11 +240,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input
-                            disabled={isSubmitting}
-                            placeholder="Enter quiz question"
-                            {...field}
-                          />
+                          <Input disabled={isSubmitting} placeholder="Enter quiz question" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -299,10 +261,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -315,11 +274,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input
-                            disabled={isSubmitting}
-                            placeholder="Enter quiz question"
-                            {...field}
-                          />
+                          <Input disabled={isSubmitting} placeholder="Enter quiz question" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -340,10 +295,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -356,11 +308,7 @@ export const AddQuizForm = ({ quizSetId }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input
-                            disabled={isSubmitting}
-                            placeholder="Enter quiz question"
-                            {...field}
-                          />
+                          <Input disabled={isSubmitting} placeholder="Enter quiz question" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

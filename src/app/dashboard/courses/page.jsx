@@ -1,4 +1,4 @@
-import { COURSE_DATA, getInstructorDashboardData } from "@/lib/dashboard-helper";
+import { COURSE_DATA, getInstructorDashboardData } from "../../../lib/dashboard-helper";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 

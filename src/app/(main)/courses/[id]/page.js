@@ -1,4 +1,4 @@
-import { getCourseDetails } from "@/BackendService/queries/courses";
+import { getCourseDetails } from "../../../../BackendService/queries/courses";
 import CourseDetails from "./_components/CourseDetails";
 import CourseDetailsIntro from "./_components/CourseDetailsIntro";
 

@@ -1,17 +1,17 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { ArrowUpDown, GraduationCap, MoreHorizontal, Pencil, Star } from "lucide-react";
+import Link from "next/link";
+import { Badge } from "../../../../components/ui/badge";
+import { Button } from "../../../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { formatPrice } from "@/lib/formatPrice";
-import { cn } from "@/lib/utils";
-import { ArrowUpDown, GraduationCap, MoreHorizontal, Pencil, Star } from "lucide-react";
-import Link from "next/link";
+} from "../../../../components/ui/dropdown-menu";
+import { formatPrice } from "../../../../lib/formatPrice";
+import { cn } from "../../../../lib/utils";
 
 export const columns = [
   {

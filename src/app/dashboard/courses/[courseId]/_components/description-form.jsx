@@ -1,10 +1,5 @@
 "use client";
 
-import { updateCourse } from "@/app/actions/course";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -12,6 +7,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import { Button } from "../../../../../components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../components/ui/form";
+import { Textarea } from "../../../../../components/ui/textarea";
+import { cn } from "../../../../../lib/utils";
+import { updateCourse } from "../../../../actions/course";
 
 const formSchema = z.object({
   description: z.string().min(1, {

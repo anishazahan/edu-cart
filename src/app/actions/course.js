@@ -1,8 +1,8 @@
 "use server";
 
-import { Course } from "@/BackendService/model/course-model";
-import { create } from "@/BackendService/queries/courses";
-import { getLoggedInUser } from "@/lib/loggedin-user";
+import { Course } from "../../BackendService/model/course-model";
+import { create } from "../../BackendService/queries/courses";
+import { getLoggedInUser } from "../../lib/loggedin-user";
 
 export async function createCourse(data) {
   try {

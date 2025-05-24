@@ -1,8 +1,8 @@
-import { getUserByEmail } from "@/BackendService/queries/users";
 import { auth } from "../../../../auth";
+import { getUserByEmail } from "../../../BackendService/queries/users";
 
-import { dbConnect } from "@/BackendService/Service/mongo";
 import { NextResponse } from "next/server";
+import { dbConnect } from "../../../BackendService/Service/mongo";
 
 export const GET = async (request) => {
   const session = await auth();

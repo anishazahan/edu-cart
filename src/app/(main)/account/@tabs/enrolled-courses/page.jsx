@@ -4,8 +4,8 @@ import { auth } from "../../../../../../auth";
 
 import { redirect } from "next/navigation";
 
-import { getEnrollmentsForUser } from "@/BackendService/queries/enrollments";
-import { getUserByEmail } from "@/BackendService/queries/users";
+import { getEnrollmentsForUser } from "../../../../../BackendService/queries/enrollments.js";
+import { getUserByEmail } from "../../../../../BackendService/queries/users";
 import EnrolledCourseCard from "../../component/enrolled-coursecard";
 
 async function EnrolledCourses() {

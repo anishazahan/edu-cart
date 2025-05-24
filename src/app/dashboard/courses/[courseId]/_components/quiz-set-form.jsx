@@ -4,15 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { updateQuizSetForCourse } from "@/app/actions/course";
-import { Button } from "@/components/ui/button";
-import { Combobox } from "@/components/ui/combobox";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "../../../../../components/ui/button";
+import { Combobox } from "../../../../../components/ui/combobox";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../../../../components/ui/form";
+import { cn } from "../../../../../lib/utils";
+import { updateQuizSetForCourse } from "../../../../actions/course";
 
 const formSchema = z.object({
   quizSetId: z.string().min(1),

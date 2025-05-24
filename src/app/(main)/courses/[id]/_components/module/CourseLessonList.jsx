@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import { Tv } from "lucide-react";
-import { getLesson } from "@/BackendService/queries/lessons";
+import { getLesson } from "../../../../../../BackendService/queries/lessons";
+import { cn } from "../../../../../../lib/utils";
 
 const CourseLessonList = async ({ lessonId }) => {
   const lesson = await getLesson(lessonId);

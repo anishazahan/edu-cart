@@ -1,7 +1,7 @@
-import { IconBadge } from "@/components/custom/icon-badge";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import Link from "next/link";
+import { IconBadge } from "../../../../../../../components/custom/icon-badge";
+import { Dialog, DialogContent } from "../../../../../../../components/ui/dialog";
 import { LessonAccessForm } from "./lesson-access-form";
 import { LessonActions } from "./lesson-action";
 import { LessonDescriptionForm } from "./lesson-description-form";

@@ -1,9 +1,9 @@
-import { EnrollCourse } from "@/components/custom/enroll-course";
-import { formatPrice } from "@/lib/formatPrice";
-import { getImageByTitle } from "@/lib/utils";
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { EnrollCourse } from "../../../../components/custom/enroll-course";
+import { formatPrice } from "../../../../lib/formatPrice.js";
+import { getImageByTitle } from "../../../../lib/utils.js";
 
 const CourseCard = ({ course }) => {
   const imageSrc = getImageByTitle(course?.title) || course?.thumbnail || `/assets/images/courses/${course?.thumbnail}`;

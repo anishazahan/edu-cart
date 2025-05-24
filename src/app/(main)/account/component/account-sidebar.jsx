@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Menu from "./account-menu";
 
-import { getUserByEmail } from "@/BackendService/queries/users";
 import { redirect } from "next/navigation";
 import { auth } from "../../../../../auth.js";
 import profileImg from "../../../../assets/img/user.webp";
+import { getUserByEmail } from "../../../../BackendService/queries/users.js";
 // import profileImg2 from "../../../../assets/img/user.png";
 
 const AccountSidebar = async () => {

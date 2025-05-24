@@ -1,4 +1,4 @@
-import { replaceMongoIdInObject } from "@/lib/convertData";
+import { replaceMongoIdInObject } from "../../lib/convertData";
 import { Lesson } from "../model/lesson.model";
 
 export async function getLesson(lessonId) {

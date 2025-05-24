@@ -1,16 +1,16 @@
-import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
+import { Button } from "../../../components/ui/button";
 
-import { stripe } from "@/lib/stripe";
+import { stripe } from "../../../lib/stripe.js";
 
 import { redirect } from "next/navigation";
 import { auth } from "../../../../auth.js";
 
-import { getCourseDetails } from "@/BackendService/queries/courses.js";
-import { enrollForCourse } from "@/BackendService/queries/enrollments.js";
-import { getUserByEmail } from "@/BackendService/queries/users.js";
-import { sendEmails } from "@/lib/emails.js";
+import { getCourseDetails } from "../../../BackendService/queries/courses.js";
+import { enrollForCourse } from "../../../BackendService/queries/enrollments.js";
+import { getUserByEmail } from "../../../BackendService/queries/users.js";
+import { sendEmails } from "../../../lib/emails.js";
 
 const Success = async ({ searchParams: { session_id, courseId } }) => {
   console.log(session_id, courseId);

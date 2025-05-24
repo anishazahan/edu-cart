@@ -6,5 +6,6 @@ export const PUBLIC_ROUTES = [
   "/register/student",
   "/register/instructor",
   "/courses",
+  "/terms",
   "/api/auth/callback/google",
 ];

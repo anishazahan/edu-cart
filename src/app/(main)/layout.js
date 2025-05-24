@@ -1,6 +1,6 @@
-import { MainNav } from "@/components/custom/main-nav";
-import { SiteFooter } from "@/components/custom/site-footer";
 import { SessionProvider } from "next-auth/react";
+import { MainNav } from "../../components/custom/main-nav";
+import { SiteFooter } from "../../components/custom/site-footer";
 
 const navLinks = [
   {

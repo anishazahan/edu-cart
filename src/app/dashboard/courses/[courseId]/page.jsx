@@ -8,12 +8,12 @@ import { PriceForm } from "./_components/price-form";
 import { QuizSetForm } from "./_components/quiz-set-form";
 import { TitleForm } from "./_components/title-form";
 
-import { getCategories } from "@/BackendService/queries/categories";
-import { getCourseDetails } from "@/BackendService/queries/courses";
-import { getAllQuizSets } from "@/BackendService/queries/quizzes";
-import AlertBanner from "@/components/custom/alert-banner";
-import { IconBadge } from "@/components/custom/icon-badge";
-import { replaceMongoIdInArray } from "@/lib/convertData";
+import { getCategories } from "../../../../BackendService/queries/categories";
+import { getCourseDetails } from "../../../../BackendService/queries/courses";
+import { getAllQuizSets } from "../../../../BackendService/queries/quizzes";
+import AlertBanner from "../../../../components/custom/alert-banner";
+import { IconBadge } from "../../../../components/custom/icon-badge";
+import { replaceMongoIdInArray } from "../../../../lib/convertData";
 
 const EditCourse = async ({ params: { courseId } }) => {
   const course = await getCourseDetails(courseId);
