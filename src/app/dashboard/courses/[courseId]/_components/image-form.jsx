@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-// import axios from "axios";
 import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
-
-import { useRouter } from "next/navigation";
 import { UploadDropzone } from "../../../../../components/custom/file-upload";
 import { Button } from "../../../../../components/ui/button";
 
@@ -22,37 +19,42 @@ export const ImageForm = ({ initialData, courseId }) => {
   const [file, setFile] = useState(null);
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(true);
-
-  useEffect(() => {
-    if (file) {
-      async function uploadFile() {
-        try {
-          const formData = new FormData();
-          formData.append("files", file[0]);
-          formData.append("destination", "/src/public/assets/images/courses");
-          formData.append("courseId", courseId);
-          const response = await fetch("/api/upload", {
-            method: "POST",
-            body: formData,
-          });
-          const result = await response.text();
-          console.log(result);
-          if (response.status === 200) {
-            initialData.imageUrl = `/src/public/assets/images/courses/${file[0].path}`;
-            toast.success(result);
-            toggleEdit();
-            router.refresh();
-          }
-        } catch (e) {
-          toast.error(e.message);
-        }
-      }
-
-      uploadFile();
-    }
-  }, [file, courseId, initialData, router]);
+  const [imageUrl, setImageUrl] = useState(initialData?.imageUrl || "");
 
   const toggleEdit = () => setIsEditing((current) => !current);
+
+  useEffect(() => {
+    if (!file) return;
+
+    const uploadFile = async () => {
+      try {
+        const formData = new FormData();
+        formData.append("files", file[0]);
+        formData.append("destination", "/src/public/assets/images/courses");
+        formData.append("courseId", courseId);
+
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.text();
+        console.log(result);
+
+        if (response.status === 200) {
+          const newImageUrl = `/src/public/assets/images/courses/${file[0].path}`;
+          setImageUrl(newImageUrl);
+          toast.success(result);
+          toggleEdit();
+          router.refresh();
+        }
+      } catch (e) {
+        toast.error(e.message);
+      }
+    };
+
+    uploadFile();
+  }, [file, courseId, router]);
 
   const onSubmit = async (values) => {
     try {
@@ -70,13 +72,13 @@ export const ImageForm = ({ initialData, courseId }) => {
         Course Image
         <Button variant="ghost" onClick={toggleEdit}>
           {isEditing && <>Cancel</>}
-          {!isEditing && !initialData.imageUrl && (
+          {!isEditing && !imageUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
               Add an image
             </>
           )}
-          {!isEditing && initialData.imageUrl && (
+          {!isEditing && imageUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
               Edit image
@@ -84,17 +86,18 @@ export const ImageForm = ({ initialData, courseId }) => {
           )}
         </Button>
       </div>
-      {!isEditing &&
-        (!initialData.imageUrl ? (
+
+      {!isEditing ? (
+        !imageUrl ? (
           <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
             <ImageIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <Image alt="Upload" fill className="object-cover rounded-md" src={initialData.imageUrl} />
+            <Image alt="Upload" fill className="object-cover rounded-md" src={imageUrl} />
           </div>
-        ))}
-      {isEditing && (
+        )
+      ) : (
         <div className="pointer-events-none">
           <div className="cursor-not-allowed">
             <UploadDropzone onUpload={(file) => setFile(file)} />

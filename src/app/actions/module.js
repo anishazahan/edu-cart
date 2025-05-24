@@ -2,11 +2,8 @@
 
 import mongoose from "mongoose";
 import { Course } from "../../BackendService/model/course-model";
-import { Module } from "../../BackendService/model/module.model";
+import { Module as ModModel } from "../../BackendService/model/module.model"; // ✅ Renamed import
 import { create } from "../../BackendService/queries/modules";
-// import { create } from "@/queries/modules";
-// import { Course } from "@/model/course-model";
-// import { Module } from "@/model/module.model";
 
 export async function createModule(data) {
   try {
@@ -15,68 +12,58 @@ export async function createModule(data) {
     const courseId = data.get("courseId");
     const order = data.get("order");
 
-    const createdModule = await create({ title, slug, course: courseId, order });
+    const createdMod = await create({ title, slug, course: courseId, order });
 
-    const foundCourse = await Course.findById(courseId); // Renamed variable
-    foundCourse.modules.push(createdModule._id);
+    const foundCourse = await Course.findById(courseId);
+    foundCourse.modules.push(createdMod._id);
     foundCourse.save();
 
-    return createdModule;
+    return createdMod;
   } catch (e) {
     throw new Error(e);
   }
 }
 
 export async function reOrderModules(data) {
-  /*
-  [
-      { id: '66577a9b91726a7429e0b9a6', position: 0 },
-      { id: '66577a4a91726a7429e0b994', position: 1 },
-      { id: '66577a9091726a7429e0b99d', position: 2 }
-  ]
-  */
-
   try {
     console.log(data);
 
     await Promise.all(
       data.map(async (element) => {
-        await Module.findByIdAndUpdate(element.id, { order: element.position });
+        await ModModel.findByIdAndUpdate(element.id, { order: element.position });
       })
     );
-
-    //
   } catch (e) {
     throw new Error(e);
   }
 }
 
-export async function updateModule(moduleId, data) {
+export async function updateModule(modId, data) {
   try {
-    await Module.findByIdAndUpdate(moduleId, data);
+    await ModModel.findByIdAndUpdate(modId, data);
   } catch (err) {
     throw new Error(err);
   }
 }
 
-export async function changeModulePublishState(moduleId) {
-  console.log("changeModulePublishState", moduleId);
-  const foundModule = await Module.findById(moduleId); // Renamed variable
+export async function changeModulePublishState(modId) {
+  console.log("changeModulePublishState", modId);
+  const foundMod = await ModModel.findById(modId);
   try {
-    const res = await Module.findByIdAndUpdate(moduleId, { active: !foundModule.active }, { lean: true });
+    const res = await ModModel.findByIdAndUpdate(modId, { active: !foundMod.active }, { lean: true });
     return res.active;
   } catch (err) {
     throw new Error(err);
   }
 }
 
-export async function deleteModule(moduleId, courseId) {
-  console.log("delete", moduleId, courseId);
+export async function deleteModule(modId, courseId) {
+  console.log("delete", modId, courseId);
   try {
-    const foundCourse = await Course.findById(courseId); // Renamed variable
-    foundCourse.modules.pull(new mongoose.Types.ObjectId(moduleId));
+    const foundCourse = await Course.findById(courseId);
+    foundCourse.modules.pull(new mongoose.Types.ObjectId(modId));
     foundCourse.save();
-    await Module.findByIdAndDelete(moduleId); // No reserved keyword used
+    await ModModel.findByIdAndDelete(modId);
   } catch (err) {
     throw new Error(err);
   }

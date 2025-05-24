@@ -4,7 +4,7 @@ import { Module } from "../model/module.model";
 
 export async function create(moduleData) {
   try {
-    const createdModule = await Module.create(moduleData); // Renamed variable
+    const createdModule = await Module.create(moduleData);
     return JSON.parse(JSON.stringify(createdModule));
   } catch (e) {
     throw new Error(e);
@@ -13,7 +13,7 @@ export async function create(moduleData) {
 
 export async function getModule(moduleId) {
   try {
-    const foundModule = await Module.findById(moduleId) // Renamed variable
+    const foundModule = await Module.findById(moduleId)
       .populate({
         path: "lessonIds",
         model: Lesson,

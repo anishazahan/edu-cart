@@ -10,8 +10,8 @@ import { getModule } from "../../../../../../BackendService/queries/modules";
 import { replaceMongoIdInArray } from "../../../../../../lib/convertData";
 import { ModuleActions } from "./_components/module-action";
 
-const Module = async ({ params: { courseId, moduleId } }) => {
-  const fetchedModule = await getModule(moduleId); // Renamed variable
+const ModulePage = async ({ params: { courseId, moduleId } }) => {
+  const fetchedModule = await getModule(moduleId); // OK to keep this name
   console.log(fetchedModule);
 
   const lessons = replaceMongoIdInArray(fetchedModule.lessonIds).sort((a, b) => a.order - b.order);
@@ -57,15 +57,7 @@ const Module = async ({ params: { courseId, moduleId } }) => {
             </div>
           </div>
           <div>
-            <div className="flex items-center gap-x-2">
-              {/* <IconBadge icon={Video} />
-              <h2 className="text-xl">Add a video</h2> */}
-            </div>
-            {/* <ChapterVideoForm
-              initialData={chapter}
-              courseId={params.courseId}
-              chapterId={params.chapterId}
-            /> */}
+            <div className="flex items-center gap-x-2">{/* Future content (e.g., video form) goes here */}</div>
           </div>
         </div>
       </div>
@@ -73,4 +65,4 @@ const Module = async ({ params: { courseId, moduleId } }) => {
   );
 };
 
-export default Module;
+export default ModulePage;

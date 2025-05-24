@@ -36,7 +36,6 @@ export const QuizSetForm = ({ initialData, courseId, options }) => {
 
   const onSubmit = async (values) => {
     try {
-      console.log(values);
       await updateQuizSetForCourse(courseId, values);
       toast.success("Course updated");
       toggleEdit();
@@ -63,10 +62,13 @@ export const QuizSetForm = ({ initialData, courseId, options }) => {
       </div>
       {!isEditing && (
         <p className={cn("text-sm mt-2", !initialData.quizSetId && "text-slate-500 italic")}>
-          {foundMatch ? <span>{foundMatch.label}</span> : <span>No quiz set selected</span>}
+          {foundMatch ? (
+            <span>{foundMatch.label}</span>
+          ) : (
+            <span>No quiz set selected. Click &quot;Edit Quiz Set&quot; to add one.</span>
+          )}
         </p>
       )}
-      {console.log({ options })}
       {isEditing && (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">

@@ -2,24 +2,24 @@
 
 import mongoose from "mongoose";
 import { Lesson } from "../../BackendService/model/lesson.model";
-import { Module } from "../../BackendService/model/module.model";
+import { Module as ModModel } from "../../BackendService/model/module.model";
 import { create } from "../../BackendService/queries/lessons";
 
 export async function createLesson(data) {
   try {
     const title = data.get("title");
     const slug = data.get("slug");
-    const moduleId = data.get("moduleId");
+    const modId = data.get("moduleId");
     const order = data.get("order");
 
-    console.log(title, slug, moduleId, order);
+    console.log(title, slug, modId, order);
 
     const createdLesson = await create({ title, slug, order });
     console.log(createdLesson);
 
-    const foundModule = await Module.findById(moduleId); // Renamed variable
-    foundModule.lessonIds.push(createdLesson._id);
-    foundModule.save();
+    const foundMod = await ModModel.findById(modId);
+    foundMod.lessonIds.push(createdLesson._id);
+    foundMod.save();
 
     return createdLesson;
   } catch (err) {
@@ -59,12 +59,12 @@ export async function changeLessonPublishState(lessonId) {
   }
 }
 
-export async function deleteLesson(lessonId, moduleId) {
+export async function deleteLesson(lessonId, modId) {
   try {
-    const foundModule = await Module.findById(moduleId); // Renamed variable
-    foundModule.lessonIds.pull(new mongoose.Types.ObjectId(lessonId));
+    const foundMod = await ModModel.findById(modId);
+    foundMod.lessonIds.pull(new mongoose.Types.ObjectId(lessonId));
     await Lesson.findByIdAndDelete(lessonId);
-    foundModule.save();
+    foundMod.save();
   } catch (err) {
     throw new Error(err);
   }
